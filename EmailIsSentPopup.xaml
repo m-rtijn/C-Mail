@@ -1,0 +1,10 @@
+﻿<Window x:Class="C_Mail_2._0.EmailIsSentPopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EmailIsSentPopup" Height="131" Width="240" ResizeMode="NoResize">
+    <Grid>
+        <Label Content="The email has been sent!" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="CloseButton" Content="Close" Margin="75,60,75,0" VerticalAlignment="Top" FontSize="16" Click="CloseButton_Click" TabIndex="1" ToolTip="Click here to close this window."/>
+
+    </Grid>
+</Window>
