@@ -6,8 +6,7 @@ TO DO:
 - Adding the todo list to the website
 - Update the graphics?
 - Display an error message when the login details are wrong
-- Add support for other mail servers (not only gMail) --Working on this atm--
-- Add error message when the email credentials are wrong --Working on this atm--
+- Add support for other mail servers (not only gMail) --The code is all there, the server info not yet--
 - Add inbox
 - Make a logo
 - Add .ico
