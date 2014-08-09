@@ -9,3 +9,4 @@ TO DO:
 - Display an error message when the login details are wrong
 - Add support for other mail servers (not only gMail)
 - Add error message when the email credentials are wrong
+- Add inbox
