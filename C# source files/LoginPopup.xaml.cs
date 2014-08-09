@@ -33,11 +33,10 @@ namespace C_Mail_2._0
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             LoginFromAddress = FromAddressTextBox.Text;
-            LoginFromPassword = FromPasswordTextBox.Text;
+            LoginFromPassword = FromPasswordPasswordBox.Password;
             Close();
         }
-
-        private void FromAddressTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void FromAddressTextBox_TextChanged(object sender, RoutedEventArgs e)
         {
 
         }

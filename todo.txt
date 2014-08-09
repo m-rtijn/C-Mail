@@ -4,7 +4,6 @@ TO DO:
 - Add documentation
 - Creating a website for the program
 - Adding the todo list to the website
-- Blur out the password when you're typing it
 - Update the graphics?
 - Display an error message when the login details are wrong
 - Add support for other mail servers (not only gMail)

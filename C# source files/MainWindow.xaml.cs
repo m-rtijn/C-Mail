@@ -65,9 +65,9 @@ namespace C_Mail_2._0
             FromAddress = LoginPopup.LoginFromAddress;
             FromPassword = LoginPopup.LoginFromPassword;
 
-            // Call the SendEmail method
             SendEmail(ToAddress, FromAddress, FromPassword, Subject, Body);
         }
+
         private void SendEmail(string ToAddress, string FromAddress, string FromPass, string subject, string body) // Sends an email
         {
             var smtp = new SmtpClient
@@ -90,9 +90,11 @@ namespace C_Mail_2._0
             }
             EmailIsSentPopupCall();
         }
-        private void EmailIsSentPopupCall()
+        private void EmailIsSentPopupCall() // Shows the EmailIsSentPopup popup
         {
+            // Create a new instance of the class
             EmailIsSentPopup popup = new EmailIsSentPopup();
+            // Show the popup
             popup.Show();
         }
     }
