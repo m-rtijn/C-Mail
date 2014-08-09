@@ -9,3 +9,5 @@ TO DO:
 - Add support for other mail servers (not only gMail)
 - Add error message when the email credentials are wrong
 - Add inbox
+- Make a logo
+- Add .ico
