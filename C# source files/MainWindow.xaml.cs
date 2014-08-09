@@ -116,7 +116,7 @@ namespace C_Mail_2._0
         private void SendEmail(string ToAddress, string FromAddress, string FromPass, string subject, string body)
         {
             // First check the host and if the enterd FromAddress is actually an address
-            if (CheckEmailHost(FromAddress) == true)
+            if (CheckArguments(ToAddress, FromAddress, FromPass, subject, body) == true && CheckEmailHost(FromAddress) == true)
             {
                 // Create a new instance of the SmtpClient class
                 SmtpClient smtpClient = new SmtpClient
@@ -147,6 +147,8 @@ namespace C_Mail_2._0
             }
         }
 
+        // Check methods
+
         /// <summary>
         /// Checks the host and if the enterd FromAddress is actually an address.
         /// </summary>
@@ -163,7 +165,7 @@ namespace C_Mail_2._0
                 switch(splitFromAddress[1])
                 {
                     default:
-                        ErrorPopupCall("ERROR: 30002" + "\n" + "Description: reached default in switch(splitFromAddres[1])");
+                        ErrorPopupCall("ERROR 30002" + "\n" + "Description: reached default in switch(splitFromAddres[1])");
                         return false;
                     case "gmail.com":
                         Host = "smtp.gmail.com";
@@ -173,10 +175,32 @@ namespace C_Mail_2._0
             }
             else
             {
-                ErrorPopupCall("ERROR: 30001" + "\n" + "Description: splitFromAddress[1] does not exists.");
+                ErrorPopupCall("ERROR 30001" + "\n" + "Description: splitFromAddress[1] does not exists.");
                 return false;
             }
 
+        }
+
+        /// <summary>
+        /// Checks if all the arguments are not null nor empty
+        /// </summary>
+        /// <param name="ToAddress"></param>
+        /// <param name="FromAddress"></param>
+        /// <param name="FromPass"></param>
+        /// <param name="subject"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        private bool CheckArguments(string ToAddress, string FromAddress, string FromPass, string subject, string body)
+        {
+            if (!(string.IsNullOrEmpty(FromAddress)) && !(string.IsNullOrEmpty(ToAddress)) && !(string.IsNullOrEmpty(FromPass)) && !(string.IsNullOrEmpty(subject)) && !(string.IsNullOrEmpty(body)))
+            {
+                return true;
+            }
+            else
+            {
+                ErrorPopupCall("ERROR 30003" + "\n" + "Description: One of the given arguments is null or empty.");
+                return false;
+            }
         }
     }
 }

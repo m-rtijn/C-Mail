@@ -12,3 +12,5 @@ TO DO:
 - Add .ico
 - Add BCC and CC options
 - Add attachment option
+- Update the wiki
+- More noob-proofing
