@@ -1,0 +1,4 @@
+TO DO:
+
+- Remember login details, encrypted
+- Add documentation
