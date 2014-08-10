@@ -5,7 +5,6 @@ TO DO:
 - Adding the todo list to the website
 - Update the graphics?
 - Display an error message when the login details are wrong --It now displays an error when the field isn't filled in--
-- Add support for other mail servers (not only gMail) --The code is all there, the server info not yet--
 - Add inbox
 - Make a logo
 - Add .ico
