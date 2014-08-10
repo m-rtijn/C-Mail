@@ -1,6 +1,5 @@
 TO DO:
 
-- Remember login details, encrypted -- IN PROGRESS --
 - Add documentation
 - Creating a website for the program
 - Adding the todo list to the website
