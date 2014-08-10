@@ -13,6 +13,5 @@ TO DO:
 In progress:
 
 - Add BCC option
-- Add attachment option
 - Working on the website for the program
   - Going to implement a feedback system on the website instead of this file
