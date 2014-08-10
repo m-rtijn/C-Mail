@@ -6,7 +6,7 @@
         <Label x:Name="FilepathLabel" Content="File path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
         <TextBox x:Name="AttachmentFilepathTextBox" HorizontalAlignment="Left" Height="31" Margin="89,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293" FontSize="16" TabIndex="1" Tag="" ToolTip="Fill in the filepath of your attachment here."/>
         <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="CloseButton_Click" TabIndex="6" ToolTip="Click here to close this window."/>
-        <Button x:Name="EnterButton" Content="Close" HorizontalAlignment="Left" Margin="307,75,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="EnterButton_Click" TabIndex="6" ToolTip="Click here to add this attachment to your email."/>
+        <Button x:Name="EnterButton" Content="Enter" HorizontalAlignment="Left" Margin="307,75,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="EnterButton_Click" TabIndex="6" ToolTip="Click here to add this attachment to your email."/>
 
     </Grid>
 </Window>

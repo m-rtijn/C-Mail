@@ -47,7 +47,7 @@ namespace C_Mail_2._0
             // Decrypt and read the data
             try
             {
-                MainWindow.ReadCredentialsFromFile("Credentials", EncryptionPassword);
+                Program.ReadCredentialsFromFile("Credentials", EncryptionPassword);
             }
             catch(Exception exception)
             {
@@ -55,7 +55,7 @@ namespace C_Mail_2._0
                 string ErrorMessage = "ERROR 50002:" + "\n" + exception.ToString();
 
                 // Show the ErrorMessage to the user
-                MainWindow.ErrorPopupCall(ErrorMessage);
+                Program.ErrorPopupCall(ErrorMessage);
 
                 // Stop executing this method
                 return;

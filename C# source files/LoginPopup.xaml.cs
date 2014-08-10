@@ -34,8 +34,8 @@ namespace C_Mail_2._0
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             // Assign the variables
-            MainWindow.FromAddress = FromAddressTextBox.Text;
-            MainWindow.FromPass = FromPasswordPasswordBox.Password;
+            Program.FromAddress = FromAddressTextBox.Text;
+            Program.FromPass = FromPasswordPasswordBox.Password;
             string EncryptionPassword = EncryptionPasswordPasswordBox.Password;
 
             // Save the details if the user wants so
@@ -43,7 +43,7 @@ namespace C_Mail_2._0
             {
                 try
                 {
-                    MainWindow.WriteCredentialsToFile(MainWindow.FromAddress, MainWindow.FromPass, "Credentials", EncryptionPassword);
+                    Program.WriteCredentialsToFile(Program.FromAddress, Program.FromPass, "Credentials", EncryptionPassword);
                 }
                 catch(Exception exception)
                 {
@@ -51,7 +51,7 @@ namespace C_Mail_2._0
                     string ErrorMessage = "ERROR 50001:" + "\n" + exception.ToString();
 
                     // Show the ErrorMessage to the user
-                    MainWindow.ErrorPopupCall(ErrorMessage);
+                    Program.ErrorPopupCall(ErrorMessage);
 
                     // Stop executing this method
                     return;

@@ -49,7 +49,7 @@ namespace C_Mail_2._0
                 string ErrorMessage = "ERROR 40001:" + "\n" + exception.ToString();
 
                 // Show the ErrorMessage to the user
-                MainWindow.ErrorPopupCall(ErrorMessage);
+                Program.ErrorPopupCall(ErrorMessage);
 
                 // Stop executing this method
                 return "";
@@ -88,7 +88,7 @@ namespace C_Mail_2._0
                 string ErrorMessage = "ERROR 40002:" + "\n" + exception.ToString();
 
                 // Show the ErrorMessage to the user
-                MainWindow.ErrorPopupCall(ErrorMessage);
+                Program.ErrorPopupCall(ErrorMessage);
 
                 // Stop executing this method
                 return "";
