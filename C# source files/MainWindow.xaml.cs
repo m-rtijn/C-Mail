@@ -58,6 +58,7 @@ namespace C_Mail_2._0
 
         private void ReportAnIssueButton_Click(object sender, RoutedEventArgs e)
         {
+            // Opens a new tab in your default browser where you can report your issue.
             Process.Start("https://github.com/Tijndagamer/C-Mail/issues/new");
         }
 
@@ -94,15 +95,16 @@ namespace C_Mail_2._0
         /// <param name="e"></param>
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            string ToAddress, Subject, Body;
+            string ToAddress, Subject, Body, CC;
 
             // Assign the variables
             ToAddress = ToAddressTextBox.Text;
             Subject = SubjectTextBox.Text;
             Body = BodyTextBox.Text;
+            CC = CCAddressTextBox.Text;
 
             // Call SendEmail to send the email
-            SendEmail(ToAddress, FromAddress, FromPass, Subject, Body);
+            SendEmail(ToAddress, FromAddress, FromPass, Subject, Body, CC);
         }
 
         // Popup call methods
@@ -147,7 +149,7 @@ namespace C_Mail_2._0
         /// <param name="FromPass">The password of the sender of the email</param>
         /// <param name="Subject">The subject of the email</param>
         /// <param name="Body">The body of the email</param>
-        private void SendEmail(string ToAddress, string FromAddress, string FromPass, string Subject, string Body)
+        private void SendEmail(string ToAddress, string FromAddress, string FromPass, string Subject, string Body, string CC)
         {
             // First check if all the TextBoxes are filled in and then check the host.
             if (CheckArguments(ToAddress, FromAddress, FromPass, Subject, Body) == true && CheckEmailHost(FromAddress) == true)
@@ -165,6 +167,12 @@ namespace C_Mail_2._0
 
                 // Create a new MailMessage, called Message, and add the properties
                 MailMessage Message = new MailMessage(FromAddress, ToAddress, Subject, Body);
+
+                // First convert string CC to MailAddress CC
+                MailAddress Copy = new MailAddress(CC);
+
+                // Add the Copy to the message
+                Message.CC.Add(Copy);
 
                 // Send the message
                 smtpClient.Send(Message);
