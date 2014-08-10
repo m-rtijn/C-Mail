@@ -16,7 +16,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading;
 using System.IO;
-using System.Security;
+using System.Diagnostics;
 
 namespace C_Mail_2._0
 {
@@ -54,6 +54,11 @@ namespace C_Mail_2._0
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void ReportAnIssueButton_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/Tijndagamer/C-Mail/issues/new");
         }
 
         /// <summary>
@@ -295,5 +300,7 @@ namespace C_Mail_2._0
             FromAddress = DecryptedData[0];
             FromPass = DecryptedData[1];
         }
+
+
     }
 }
