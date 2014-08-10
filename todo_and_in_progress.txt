@@ -8,10 +8,10 @@ TO DO:
 - Make a logo
 - Add .ico
 - Update the wiki
-- More noob-proofing
+- Add BCC option
 
 In progress:
 
-- Add BCC option
+- More noob-proofing (exception handling, testing etc)
 - Working on the website for the program
   - Going to implement a feedback system on the website instead of this file
