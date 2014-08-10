@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Security;
+using System.IO;
 
 namespace C_Mail_2._0
 {
@@ -20,7 +20,7 @@ namespace C_Mail_2._0
     /// </summary>
     public partial class LoginPopup : Window
     {
-        public static string LoginFromAddress, LoginFromPassword, EncryptionPassword;
+        public static string LoginFromAddress, LoginFromPassword;
         public static bool RememberDetailsCheckBoxState = false;
         public LoginPopup()
         {
@@ -34,9 +34,18 @@ namespace C_Mail_2._0
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            // Assign the variables
             LoginFromAddress = FromAddressTextBox.Text;
             LoginFromPassword = FromPasswordPasswordBox.Password;
-            EncryptionPassword = EncryptionPasswordPasswordBox.Password;
+            string EncryptionPassword = EncryptionPasswordPasswordBox.Password;
+
+            // Save the details if the user wants so
+            if (RememberDetailsCheckBoxState == true)
+            {
+                MainWindow.WriteCredentialsToFile(LoginFromAddress, LoginFromPassword, "Credentials", EncryptionPassword);
+            }
+
+            // Close the window
             Close();
         }
         private void HandleCheck(object sender, RoutedEventArgs e)

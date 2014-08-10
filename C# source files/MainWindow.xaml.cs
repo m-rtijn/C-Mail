@@ -27,13 +27,14 @@ namespace C_Mail_2._0
     {
         private static string Host = "";
         private static int Port = 0;
+        public static string FromAddress, FromPass;
         
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        // Button methods
+        // Button and Textbox methods
 
         private void ToAddressTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -55,32 +56,55 @@ namespace C_Mail_2._0
             Environment.Exit(0);
         }
 
+        /// <summary>
+        /// Logs in.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            LoginPopup loginPopup = new LoginPopup();
-            loginPopup.Show();
-            
+            // If the credentials are saved, open those, else open the login popup
+            if (File.Exists("Credentials") == true)
+            {
+                // Ask the Encryption password using the EncryptionPasswordPopup
+                EncryptionPasswordPopup popup = new EncryptionPasswordPopup();
+                
+                //Show the popup
+                popup.Show();
+            }
+            else
+            {
+                // Create a new instance of the LoginPopup class
+                LoginPopup loginPopup = new LoginPopup();
+
+                // Show the popup
+                loginPopup.Show();
+            }
         }
 
+        /// <summary>
+        /// Prepares variables to call SendEmail to and the email
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            string ToAddress, Subject, Body, FromAddress, FromPassword;
+            string ToAddress, Subject, Body;
 
             // Assign the variables
             ToAddress = ToAddressTextBox.Text;
             Subject = SubjectTextBox.Text;
             Body = BodyTextBox.Text;
-            FromAddress = LoginPopup.LoginFromAddress;
-            FromPassword = LoginPopup.LoginFromPassword;
 
-            // Save the details if the user wants so
-            if (LoginPopup.RememberDetailsCheckBoxState == true)
+            // Check if FromAddress and FromPass are filled in yet
+            if (!(string.IsNullOrEmpty(FromAddress)) && !(string.IsNullOrEmpty(FromPass)))
             {
-                WriteCredentialsToFile(LoginPopup.LoginFromAddress, LoginPopup.LoginFromPassword, "Credentials", LoginPopup.EncryptionPassword);
+                FromAddress = LoginPopup.LoginFromAddress;
+                FromPass = LoginPopup.LoginFromPassword;
             }
 
             // Call SendEmail to send the email
-            SendEmail(ToAddress, FromAddress, FromPassword, Subject, Body);
+            SendEmail(ToAddress, FromAddress, FromPass, Subject, Body);
         }
 
         // Popup call methods
@@ -92,15 +116,17 @@ namespace C_Mail_2._0
         {
             // Create a new instance of the class
             EmailIsSentPopup popup = new EmailIsSentPopup();
+
             // Show the popup
             popup.Show();
+            popup.Activate();
         }
 
         /// <summary>
         /// Shows an error popup, not the best thing to see...
         /// </summary>
         /// <param name="ErrorMessage">The error message</param>
-        private void ErrorPopupCall(string ErrorMessage)
+        public static void ErrorPopupCall(string ErrorMessage)
         {
             // Create a new instance of the ErrorPopup class
             ErrorPopup Error = new ErrorPopup();
@@ -110,6 +136,7 @@ namespace C_Mail_2._0
 
             // Show the error
             Error.Show();
+            Error.Activate();
         }
 
         // Email methods
@@ -152,6 +179,7 @@ namespace C_Mail_2._0
             }
             else
             {
+                // If not, stop the execution of this method.
                 return;
             }
         }
@@ -218,10 +246,11 @@ namespace C_Mail_2._0
         /// <summary>
         /// First encrypts, and then saves the login credentials to a file
         /// </summary>
-        /// <param name="FromAddress"></param>
-        /// <param name="FromPass"></param>
-        /// <param name="Path"></param>
-        private void WriteCredentialsToFile(string FromAddress, string FromPass, string Path, string EncryptionPassword)
+        /// <param name="FromAddress">The FromAddress to be encrypted</param>
+        /// <param name="FromPass">The FromPass to be encrypted</param>
+        /// <param name="Path">The path of the file</param>
+        /// <param name="EncryptionPassword">The password used for the encryption</param>
+        public static void WriteCredentialsToFile(string FromAddress, string FromPass, string Path, string EncryptionPassword)
         {
             // Create a new instance of the FileStream class
             FileStream fileStream = File.OpenWrite(Path);
@@ -239,6 +268,37 @@ namespace C_Mail_2._0
 
             // Close the BinaryWriter
             writer.Close();
+        }
+
+        /// <summary>
+        /// Reads and decrypts the FromAddress and Frompass from the file where they're saved
+        /// </summary>
+        /// <param name="Path"></param>
+        /// <param name="EncryptionPassword">The password used for the encryption</param>
+        public static void ReadCredentialsFromFile(string Path, string EncryptionPassword)
+        {
+            // Create a new instance of the FileStream class
+            FileStream fileStream = File.OpenRead(Path);
+
+            // Create a new instance of the BinaryReader class
+            BinaryReader reader = new BinaryReader(fileStream);
+
+            // Read the file
+            string EncryptedFromAddress = reader.ReadString();
+            string EncryptedFromPass = reader.ReadString();
+
+            // Create an array to store the decrypted data in
+            string[] DecryptedData = new string[2];
+
+            // Decrypt the FromAddress and FromPass
+            DecryptedData[0] = EncryptionClass.Decrypt(EncryptedFromAddress, EncryptionPassword);
+            DecryptedData[1] = EncryptionClass.Decrypt(EncryptedFromPass, EncryptionPassword);
+
+            // Assign the variables
+            FromAddress = DecryptedData[0];
+            FromPass = DecryptedData[1];
+
+            ErrorPopupCall(FromAddress + FromPass);
         }
     }
 }
