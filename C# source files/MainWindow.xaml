@@ -1,6 +1,7 @@
-﻿<Window x:Name="MainWindow1" x:Class="C_Mail_2._0.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="MainWindow1" x:Class="C_Mail_2._0.MainWindow"
         Title="C-Mail" Height="530" Width="530" ResizeMode="NoResize">
     <Grid Margin="0,0,0,0">
         <Label x:Name="ToLabel" Content="To:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,0" FontSize="16"/>
@@ -13,7 +14,8 @@
         <TextBox x:Name="SubjectTextBox" HorizontalAlignment="Left" Height="31" Margin="75,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="432" FontSize="16" TextChanged="ToAddressTextBox_TextChanged" ToolTip="Fill in your subject here." TabIndex="2"/>
         <Button x:Name="ReportAnIssueButton" Content="Report a bug" HorizontalAlignment="Left" Margin="170,453,0,0" VerticalAlignment="Top" Width="110" FontSize="16" Click="ReportAnIssueButton_Click" TabIndex="5" ToolTip="Click here to report a bug."/>
         <Label x:Name="CC_Label" Content="CC:" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,0" FontSize="16"/>
-        <TextBox x:Name="CCAddressTextBox" HorizontalAlignment="Left" Height="31" Margin="46,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="461" FontSize="16" TextChanged="ToAddressTextBox_TextChanged" TabIndex="1" Tag="" ToolTip="Fill in the address of the recipient here."/>
+        <TextBox x:Name="CCAddressTextBox" HorizontalAlignment="Left" Height="31" Margin="46,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="461" FontSize="16" TextChanged="ToAddressTextBox_TextChanged" TabIndex="1" Tag="" ToolTip="Fill in the address of the CC here."/>
+        <Button x:Name="AddAttachmentButton" Content="Add attachment" HorizontalAlignment="Left" Margin="285,453,0,0" VerticalAlignment="Top" Width="125" FontSize="16" Click="AddAttachmentButton_Click" TabIndex="5" ToolTip="Click here to add an attachment to your email."/>
 
     </Grid>
 </Window>

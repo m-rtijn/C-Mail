@@ -62,6 +62,12 @@ namespace C_Mail_2._0
             Process.Start("https://github.com/Tijndagamer/C-Mail/issues/new");
         }
 
+        private void AddAttachmentButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddAttachmentPopup popup = new AddAttachmentPopup();
+            popup.Show();
+        }
+
         /// <summary>
         /// Logs in.
         /// </summary>
@@ -95,16 +101,17 @@ namespace C_Mail_2._0
         /// <param name="e"></param>
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            string ToAddress, Subject, Body, CC;
+            string ToAddress, Subject, Body, CC, S_Attachment;
 
             // Assign the variables
             ToAddress = ToAddressTextBox.Text;
             Subject = SubjectTextBox.Text;
             Body = BodyTextBox.Text;
             CC = CCAddressTextBox.Text;
+            S_Attachment = AddAttachmentPopup.AttachmentPath;
 
             // Call SendEmail to send the email
-            SendEmail(ToAddress, FromAddress, FromPass, Subject, Body, CC);
+            SendEmail(ToAddress, FromAddress, FromPass, Subject, Body, CC, S_Attachment);
         }
 
         // Popup call methods
@@ -149,7 +156,7 @@ namespace C_Mail_2._0
         /// <param name="FromPass">The password of the sender of the email</param>
         /// <param name="Subject">The subject of the email</param>
         /// <param name="Body">The body of the email</param>
-        private void SendEmail(string ToAddress, string FromAddress, string FromPass, string Subject, string Body, string CC)
+        private void SendEmail(string ToAddress, string FromAddress, string FromPass, string Subject, string Body, string CC, string S_Attachment)
         {
             // First check if all the TextBoxes are filled in and then check the host.
             if (CheckArguments(ToAddress, FromAddress, FromPass, Subject, Body) == true && CheckEmailHost(FromAddress) == true)
@@ -168,11 +175,25 @@ namespace C_Mail_2._0
                 // Create a new MailMessage, called Message, and add the properties
                 MailMessage Message = new MailMessage(FromAddress, ToAddress, Subject, Body);
 
-                // First convert string CC to MailAddress CC
-                MailAddress Copy = new MailAddress(CC);
+                // If there's something in the CC tab, add it to Message
+                if (!(string.IsNullOrEmpty(CC)))
+                {
+                    // First convert string CC to MailAddress CC
+                    MailAddress Copy = new MailAddress(CC);
 
-                // Add the Copy to the message
-                Message.CC.Add(Copy);
+                    // Add the Copy to the message
+                    Message.CC.Add(Copy);
+                }
+
+                // If there's something in the S_Attachment, add it to Message
+                if (!(string.IsNullOrEmpty(S_Attachment)))
+                {
+                    // Create a new Attachment
+                    Attachment File = new Attachment(S_Attachment);
+
+                    // Add it to Message
+                    Message.Attachments.Add(File);
+                }
 
                 // Send the message
                 smtpClient.Send(Message);
