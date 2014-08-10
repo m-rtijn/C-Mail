@@ -24,6 +24,11 @@ namespace C_Mail_2._0
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Closes this window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();

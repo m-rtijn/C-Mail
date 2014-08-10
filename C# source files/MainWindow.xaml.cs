@@ -194,9 +194,6 @@ namespace C_Mail_2._0
                 // This switch checks which host it is, and assigns the Host and Port variables to the corresponding Host and Port
                 switch(splitFromAddress[1])
                 {
-                    default:
-                        ErrorPopupCall("ERROR 30002" + "\n" + "Description: reached default in switch(splitFromAddres[1])");
-                        return false;
                     case "gmail.com":
                         Host = "smtp.gmail.com";
                         Port = 587;
@@ -205,6 +202,9 @@ namespace C_Mail_2._0
                         Host = "smtp.mail.yahoo.com";
                         Port = 465;
                         return true;
+                    default:
+                        ErrorPopupCall("ERROR 30002" + "\n" + "Description: reached default in switch(splitFromAddres[1])");
+                        return false;
                 }
             }
             else

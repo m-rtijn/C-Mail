@@ -19,20 +19,30 @@ namespace C_Mail_2._0
     /// </summary>
     public partial class EncryptionPasswordPopup : Window
     {
-        public static string EncryptionPassword;
         public EncryptionPasswordPopup()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Closes this window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Reads and decrypts stored login credentials using ReadCredentialsFromFile(string Path, string EncryptionPassword)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            EncryptionPassword = EncryptionPasswordPasswordBox.Password;
+            // Assign EncryptionPassword
+            string EncryptionPassword = EncryptionPasswordPasswordBox.Password;
 
             // Decrypt and read the data
             MainWindow.ReadCredentialsFromFile("Credentials", EncryptionPassword);

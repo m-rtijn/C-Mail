@@ -20,7 +20,6 @@ namespace C_Mail_2._0
     /// </summary>
     public partial class LoginPopup : Window
     {
-        public static string LoginFromAddress, LoginFromPassword;
         public static bool RememberDetailsCheckBoxState = false;
         public LoginPopup()
         {
@@ -42,7 +41,7 @@ namespace C_Mail_2._0
             // Save the details if the user wants so
             if (RememberDetailsCheckBoxState == true)
             {
-                MainWindow.WriteCredentialsToFile(LoginFromAddress, LoginFromPassword, "Credentials", EncryptionPassword);
+                MainWindow.WriteCredentialsToFile(MainWindow.FromAddress, MainWindow.FromPass, "Credentials", EncryptionPassword);
             }
 
             // Close the window
