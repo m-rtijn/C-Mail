@@ -4,11 +4,13 @@ TO DO:
 - Creating a website for the program
 - Adding the todo list to the website
 - Update the graphics?
-- Display an error message when the login details are wrong --It now displays an error when the field isn't filled in--
 - Add inbox
 - Make a logo
 - Add .ico
-- Add BCC and CC options
-- Add attachment option
 - Update the wiki
 - More noob-proofing
+
+In progress:
+
+- Add BCC option
+- Add attachment option
