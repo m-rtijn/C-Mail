@@ -2,4 +2,7 @@ Error 30001: Description: splitFromAddress[1] does not exists.
 Solution: The given email address does not contain an "@", please check your email address again
 
 Error 30002: Description: reached default in switch(splitFromAddres[1])
-Solution: the server of the sender of the email is not recognized and/or not supported.
+Solution: The server of the sender of the email is not recognized and/or not supported.
+
+Error 30003: Description: One of the given arguments is null or empty.
+Solution: Check again if you have filled in ALL the TextBoxes, and the PasswordBox

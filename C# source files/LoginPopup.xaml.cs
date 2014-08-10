@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Security;
 
 namespace C_Mail_2._0
 {
@@ -19,7 +20,8 @@ namespace C_Mail_2._0
     /// </summary>
     public partial class LoginPopup : Window
     {
-        public static string LoginFromAddress, LoginFromPassword;
+        public static string LoginFromAddress, LoginFromPassword, EncryptionPassword;
+        public static bool RememberDetailsCheckBoxState = false;
         public LoginPopup()
         {
             InitializeComponent();
@@ -34,11 +36,28 @@ namespace C_Mail_2._0
         {
             LoginFromAddress = FromAddressTextBox.Text;
             LoginFromPassword = FromPasswordPasswordBox.Password;
+            EncryptionPassword = EncryptionPasswordPasswordBox.Password;
             Close();
+        }
+        private void HandleCheck(object sender, RoutedEventArgs e)
+        {
+            RememberDetailsCheckBoxState = true;
+
+            // Show the EncryptionPasswordLabel and PasswordBox
+            EncryptionPasswordLabel.Visibility = Visibility.Visible;
+            EncryptionPasswordPasswordBox.Visibility = Visibility.Visible;
+        }
+        private void HandleUncheck(object sender, RoutedEventArgs e)
+        {
+            RememberDetailsCheckBoxState = false;
+
+            // Hide the EncryptionPasswordLabel and PasswordBox
+            EncryptionPasswordLabel.Visibility = Visibility.Hidden;
+            EncryptionPasswordPasswordBox.Visibility = Visibility.Hidden;
         }
         private void FromAddressTextBox_TextChanged(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }

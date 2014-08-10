@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Net;
 using System.Net.Mail;
 using System.Threading;
+using System.IO;
+using System.Security;
 
 namespace C_Mail_2._0
 {
@@ -23,9 +25,9 @@ namespace C_Mail_2._0
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static string Host = "";
-        public static int Port = 0;
-
+        private static string Host = "";
+        private static int Port = 0;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -57,6 +59,7 @@ namespace C_Mail_2._0
         {
             LoginPopup loginPopup = new LoginPopup();
             loginPopup.Show();
+            
         }
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
@@ -69,6 +72,12 @@ namespace C_Mail_2._0
             Body = BodyTextBox.Text;
             FromAddress = LoginPopup.LoginFromAddress;
             FromPassword = LoginPopup.LoginFromPassword;
+
+            // Save the details if the user wants so
+            if (LoginPopup.RememberDetailsCheckBoxState == true)
+            {
+                WriteCredentialsToFile(LoginPopup.LoginFromAddress, LoginPopup.LoginFromPassword, "Credentials", LoginPopup.EncryptionPassword);
+            }
 
             // Call SendEmail to send the email
             SendEmail(ToAddress, FromAddress, FromPassword, Subject, Body);
@@ -90,7 +99,7 @@ namespace C_Mail_2._0
         /// <summary>
         /// Shows an error popup, not the best thing to see...
         /// </summary>
-        /// <param name="ErrorMessage">the error message</param>
+        /// <param name="ErrorMessage">The error message</param>
         private void ErrorPopupCall(string ErrorMessage)
         {
             // Create a new instance of the ErrorPopup class
@@ -111,12 +120,12 @@ namespace C_Mail_2._0
         /// <param name="ToAddress">The address of the recipient of the email</param>
         /// <param name="FromAddress">The address of the sender of the email</param>
         /// <param name="FromPass">The password of the sender of the email</param>
-        /// <param name="subject">The subject of the email</param>
-        /// <param name="body">The body of the email</param>
-        private void SendEmail(string ToAddress, string FromAddress, string FromPass, string subject, string body)
+        /// <param name="Subject">The subject of the email</param>
+        /// <param name="Body">The body of the email</param>
+        private void SendEmail(string ToAddress, string FromAddress, string FromPass, string Subject, string Body)
         {
-            // First check the host and if the enterd FromAddress is actually an address
-            if (CheckArguments(ToAddress, FromAddress, FromPass, subject, body) == true && CheckEmailHost(FromAddress) == true)
+            // First check if all the TextBoxes are filled in and then check the host.
+            if (CheckArguments(ToAddress, FromAddress, FromPass, Subject, Body) == true && CheckEmailHost(FromAddress) == true)
             {
                 // Create a new instance of the SmtpClient class
                 SmtpClient smtpClient = new SmtpClient
@@ -130,7 +139,7 @@ namespace C_Mail_2._0
                 };
 
                 // Create a new MailMessage, called Message, and add the properties
-                MailMessage Message = new MailMessage(FromAddress, ToAddress, subject, body);
+                MailMessage Message = new MailMessage(FromAddress, ToAddress, Subject, Body);
 
                 // Send the message
                 smtpClient.Send(Message);
@@ -192,15 +201,44 @@ namespace C_Mail_2._0
         /// <returns></returns>
         private bool CheckArguments(string ToAddress, string FromAddress, string FromPass, string subject, string body)
         {
+            // Check for all arguments if they're null or empty, of they all aren't null or empty return true else return false and an error message
             if (!(string.IsNullOrEmpty(FromAddress)) && !(string.IsNullOrEmpty(ToAddress)) && !(string.IsNullOrEmpty(FromPass)) && !(string.IsNullOrEmpty(subject)) && !(string.IsNullOrEmpty(body)))
             {
                 return true;
             }
             else
             {
-                ErrorPopupCall("ERROR 30003" + "\n" + "Description: One of the given arguments is null or empty.");
+                ErrorPopupCall("ERROR 30003" + "\n" + "Description: one of the given arguments is null or empty.");
                 return false;
             }
+        }
+
+        // Writing and Reading methods
+
+        /// <summary>
+        /// First encrypts, and then saves the login credentials to a file
+        /// </summary>
+        /// <param name="FromAddress"></param>
+        /// <param name="FromPass"></param>
+        /// <param name="Path"></param>
+        private void WriteCredentialsToFile(string FromAddress, string FromPass, string Path, string EncryptionPassword)
+        {
+            // Create a new instance of the FileStream class
+            FileStream fileStream = File.OpenWrite(Path);
+
+            // Create a new instance of he BinaryWriter class
+            BinaryWriter writer = new BinaryWriter(fileStream);
+
+            // Encrypt the FromAddress and Frompass
+            string EncryptedFromAddress = EncryptionClass.Encrypt(FromAddress, EncryptionPassword);
+            string EncryptedFromPass = EncryptionClass.Encrypt(FromPass, EncryptionPassword);
+
+            // Write the credentials to the file
+            writer.Write(EncryptedFromAddress);
+            writer.Write(EncryptedFromPass);
+
+            // Close the BinaryWriter
+            writer.Close();
         }
     }
 }

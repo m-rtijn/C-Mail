@@ -1,11 +1,11 @@
 TO DO:
 
-- Remember login details, encrypted
+- Remember login details, encrypted -- IN PROGRESS --
 - Add documentation
 - Creating a website for the program
 - Adding the todo list to the website
 - Update the graphics?
-- Display an error message when the login details are wrong
+- Display an error message when the login details are wrong --It now displays an error when the field isn't filled in--
 - Add support for other mail servers (not only gMail) --The code is all there, the server info not yet--
 - Add inbox
 - Make a logo
