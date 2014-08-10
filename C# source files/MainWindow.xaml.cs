@@ -51,20 +51,37 @@ namespace C_Mail_2._0
 
         }
 
+        /// <summary>
+        /// Exits the program when clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }
 
+        /// <summary>
+        /// Opens a new tab in your default browser where you can report your issue when the button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReportAnIssueButton_Click(object sender, RoutedEventArgs e)
         {
-            // Opens a new tab in your default browser where you can report your issue.
             Process.Start("https://github.com/Tijndagamer/C-Mail/issues/new");
         }
 
+        /// <summary>
+        /// When the AddAttachmentButton is clicked, show the AddAttachmentpopup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddAttachmentButton_Click(object sender, RoutedEventArgs e)
         {
+            // Create a new instance of the AddAttachmentPopup
             AddAttachmentPopup popup = new AddAttachmentPopup();
+
+            // Show the popup
             popup.Show();
         }
 
@@ -196,7 +213,24 @@ namespace C_Mail_2._0
                 }
 
                 // Send the message
-                smtpClient.Send(Message);
+                try
+                {
+                    smtpClient.Send(Message);
+                }
+                catch (Exception exception)
+                {
+                    // Create the ErrorMessage
+                    string ErrorMessage = "ERROR 20001:" + "\n" + exception.ToString();
+
+                    // Show the ErrorMessage to the user
+                    ErrorPopupCall(ErrorMessage);
+
+                    // Cleanup
+                    Message.Dispose();
+
+                    // Stop executing this method
+                    return;
+                }
 
                 // Cleanup
                 Message.Dispose();
@@ -283,6 +317,9 @@ namespace C_Mail_2._0
         /// <param name="EncryptionPassword">The password used for the encryption</param>
         public static void WriteCredentialsToFile(string FromAddress, string FromPass, string Path, string EncryptionPassword)
         {
+            // declare variables
+            string EncryptedFromAddress, EncryptedFromPass;
+
             // Create a new instance of the FileStream class
             FileStream fileStream = File.OpenWrite(Path);
 
@@ -290,8 +327,8 @@ namespace C_Mail_2._0
             BinaryWriter writer = new BinaryWriter(fileStream);
 
             // Encrypt the FromAddress and Frompass
-            string EncryptedFromAddress = EncryptionClass.Encrypt(FromAddress, EncryptionPassword);
-            string EncryptedFromPass = EncryptionClass.Encrypt(FromPass, EncryptionPassword);
+            EncryptedFromAddress = EncryptionClass.Encrypt(FromAddress, EncryptionPassword);
+            EncryptedFromPass = EncryptionClass.Encrypt(FromPass, EncryptionPassword);
 
             // Write the credentials to the file
             writer.Write(EncryptedFromAddress);
@@ -329,7 +366,5 @@ namespace C_Mail_2._0
             FromAddress = DecryptedData[0];
             FromPass = DecryptedData[1];
         }
-
-
     }
 }

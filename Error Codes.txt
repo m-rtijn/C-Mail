@@ -6,3 +6,6 @@ Solution: The server of the sender of the email is not recognized and/or not sup
 
 Error 30003: Description: One of the given arguments is null or empty.
 Solution: Check again if you have filled in ALL the TextBoxes, and the PasswordBox
+
+Error 40002:
+Solution: Wrong password given

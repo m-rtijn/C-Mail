@@ -41,7 +41,21 @@ namespace C_Mail_2._0
             // Save the details if the user wants so
             if (RememberDetailsCheckBoxState == true)
             {
-                MainWindow.WriteCredentialsToFile(MainWindow.FromAddress, MainWindow.FromPass, "Credentials", EncryptionPassword);
+                try
+                {
+                    MainWindow.WriteCredentialsToFile(MainWindow.FromAddress, MainWindow.FromPass, "Credentials", EncryptionPassword);
+                }
+                catch(Exception exception)
+                {
+                    // Create the ErrorMessage
+                    string ErrorMessage = "ERROR 50001:" + "\n" + exception.ToString();
+
+                    // Show the ErrorMessage to the user
+                    MainWindow.ErrorPopupCall(ErrorMessage);
+
+                    // Stop executing this method
+                    return;
+                }
             }
 
             // Close the window

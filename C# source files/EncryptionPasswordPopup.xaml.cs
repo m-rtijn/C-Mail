@@ -45,7 +45,21 @@ namespace C_Mail_2._0
             string EncryptionPassword = EncryptionPasswordPasswordBox.Password;
 
             // Decrypt and read the data
-            MainWindow.ReadCredentialsFromFile("Credentials", EncryptionPassword);
+            try
+            {
+                MainWindow.ReadCredentialsFromFile("Credentials", EncryptionPassword);
+            }
+            catch(Exception exception)
+            {
+                // Create the ErrorMessage
+                string ErrorMessage = "ERROR 50002:" + "\n" + exception.ToString();
+
+                // Show the ErrorMessage to the user
+                MainWindow.ErrorPopupCall(ErrorMessage);
+
+                // Stop executing this method
+                return;
+            }
 
             // Close this window
             Close();
