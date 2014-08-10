@@ -201,6 +201,10 @@ namespace C_Mail_2._0
                         Host = "smtp.gmail.com";
                         Port = 587;
                         return true;
+                    case "yahoo.com":
+                        Host = "smtp.mail.yahoo.com";
+                        Port = 465;
+                        return true;
                 }
             }
             else
