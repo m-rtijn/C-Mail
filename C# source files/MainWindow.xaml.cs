@@ -290,8 +290,6 @@ namespace C_Mail_2._0
             // Assign the variables
             FromAddress = DecryptedData[0];
             FromPass = DecryptedData[1];
-
-            ErrorPopupCall(FromAddress + FromPass);
         }
     }
 }
