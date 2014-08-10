@@ -35,8 +35,8 @@ namespace C_Mail_2._0
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             // Assign the variables
-            LoginFromAddress = FromAddressTextBox.Text;
-            LoginFromPassword = FromPasswordPasswordBox.Password;
+            MainWindow.FromAddress = FromAddressTextBox.Text;
+            MainWindow.FromPass = FromPasswordPasswordBox.Password;
             string EncryptionPassword = EncryptionPasswordPasswordBox.Password;
 
             // Save the details if the user wants so

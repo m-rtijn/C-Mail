@@ -96,13 +96,6 @@ namespace C_Mail_2._0
             Subject = SubjectTextBox.Text;
             Body = BodyTextBox.Text;
 
-            // Check if FromAddress and FromPass are filled in yet
-            if (!(string.IsNullOrEmpty(FromAddress)) && !(string.IsNullOrEmpty(FromPass)))
-            {
-                FromAddress = LoginPopup.LoginFromAddress;
-                FromPass = LoginPopup.LoginFromPassword;
-            }
-
             // Call SendEmail to send the email
             SendEmail(ToAddress, FromAddress, FromPass, Subject, Body);
         }
