@@ -42,8 +42,10 @@ namespace C_Mail_2._0
             // Create a list to store the messages in
             List<Message> AllMessages = new List<Message>();
 
+            // Retrieve all the messages
+            AllMessages = Program.RetrieveAllMessages("pop.gmail.com", 995, Program.FromAddress, Program.FromPass, true);
 
-            AllMessages = Program.RetrieveAllMessages("pop3.google.com", 995, Program.FromAddress, Program.FromPass, true);
+            EmailBodyTextBox.Text = AllMessages[Program.MessageCount].MessagePart.ToString();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)

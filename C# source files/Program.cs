@@ -19,6 +19,7 @@ namespace C_Mail_2._0
         private static string Host = "";
         private static int Port = 0;
         public static string FromAddress, FromPass;
+        public static int MessageCount;
 
         // Popup call methods
 
@@ -223,9 +224,6 @@ namespace C_Mail_2._0
         {
             using(Pop3Client client = new Pop3Client())
             {
-                // Create a list to store our messages in
-                List<Message> AllMessages = new List<Message>();
-
                 // Connect to the server
                 try
                 {
@@ -239,15 +237,38 @@ namespace C_Mail_2._0
                     // Show the error message
                     Program.ErrorPopupCall(ErrorMessage);
 
+                    // Make an empty list to return
+                    List<Message> Stop = new List<Message>(1);
+
                     // Stop executing this method
-                    return AllMessages;
+                    return Stop;
                 }
 
                 // Authenticate to the server
-                client.Authenticate(FromAddress, FromPass);
+                try
+                {
+                    client.Authenticate(FromAddress, FromPass);
+                }
+                catch (Exception exception)
+                {
+                    // Create the error message
+                    string ErrorMessage = "ERROR 60002" + "\n" + exception.ToString();
 
+                    // Show the error message
+                    Program.ErrorPopupCall(ErrorMessage);
+
+                    // Make an empty list to return
+                    List<Message> Stop = new List<Message>(1);
+
+                    // Stop executing this method
+                    return Stop;
+                }
+                
                 // Get number of messages in the inbox
-                int MessageCount = client.GetMessageCount();
+                MessageCount = client.GetMessageCount();
+
+                // Create a list to store our messages in
+                List<Message> AllMessages = new List<Message>(MessageCount);
 
                 // Get all the messages
                 for(int i = MessageCount; i > 0; i--)
