@@ -6,10 +6,6 @@
 - Creating a website for the program
 - Adding the todo list to the website
 - Update the graphics
-- Add different folders
-  - Inbox
-  - Sent
-  - Drag and drop folders
 - Make a logo
 - Add .ico
 - Update the wiki
@@ -19,6 +15,10 @@
 
 ** IN PROGRESS **
 
+- Add different folders
+  - Inbox
+  - Sent
+  - Drag and drop folders
 - More noob-proofing (exception handling, testing etc)
 - Working on the website for the program
   - Going to implement a feedback system on the website instead of this file
