@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 using OpenPop.Pop3;
 using OpenPop.Mime;
 
@@ -45,18 +46,49 @@ namespace C_Mail_2._0
             // Retrieve all the messages
             AllMessages = Program.RetrieveAllMessages("pop.gmail.com", 995, Program.FromAddress, Program.FromPass, true);
 
-            // Apperantly MessageCount is 0. fml.
-            EmailBodyTextBox.Text = Program.MessageCount.ToString();
-            
+            try
+            {
+                // Show the sender of the last received email
+                FromTextBox.Text = AllMessages[Program.MessageCount].Headers.Sender.ToString();
+
+                // Show the subject of the last received email
+                SubjectTextBox.Text = AllMessages[Program.MessageCount].Headers.Subject.ToString();
+
+                // Show the body of the last received email
+                EmailBodyTextBox.Text = AllMessages[Program.MessageCount].MessagePart.ToString();
+            }
+            catch (Exception exception)
+            {
+                // Create the error message
+                string ErrorMessage = "ERROR 70001" + "\n" + exception.ToString();
+
+                // Show the error message
+                Program.ErrorPopupCall(ErrorMessage);
+
+                // Stop executing this method
+                return;
+            }
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            // Create a new instance of LoginPopup
-            LoginPopup popup = new LoginPopup();
+            // If the credentials are saved, open those, else open the login popup
+            if (File.Exists("Credentials") == true)
+            {
+                // Ask the Encryption password using the EncryptionPasswordPopup
+                EncryptionPasswordPopup popup = new EncryptionPasswordPopup();
 
-            // Shot it
-            popup.Show();
+                //Show the popup
+                popup.Show();
+            }
+            else
+            {
+                // Create a new instance of the LoginPopup class
+                LoginPopup loginPopup = new LoginPopup();
+
+                // Show the popup
+                loginPopup.Show();
+            }
         }
     }
 }

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Net;
-using System.Net.Mail;
 using System.Threading;
+using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Mail;
 using OpenPop.Pop3;
 using OpenPop.Mime;
 
