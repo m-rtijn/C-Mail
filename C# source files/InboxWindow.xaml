@@ -3,14 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="C-Mail" Height="500" Width="700">
     <Grid>
-        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="RefreshButton_Click"/>
-        <Button x:Name="SendEmailButton" Content="Send email" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="90" FontSize="16" Click="SendEmailButton_Click"/>
+        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="RefreshButton_Click" ToolTip="Click here to refresh your inbox."/>
+        <Button x:Name="SendEmailButton" Content="Send email" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="90" FontSize="16" Click="SendEmailButton_Click" ToolTip="Click here to send an email."/>
         <Label x:Name="SubjectSubjectLabel" Content="Subject:" HorizontalAlignment="Left" Margin="195,74,0,0" VerticalAlignment="Top" FontSize="16" Width="75" BorderThickness="1"/>
         <TextBox x:Name="SubjectTextBox" Margin="275,74,25,363" TextWrapping="Wrap" FontSize="17" Focusable="False"/>
         <TextBox x:Name="EmailBodyTextBox" Margin="200,120,25,25" TextWrapping="Wrap" Focusable="False" FontSize="16"/>
-        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="LoginButton_Click"/>
+        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="LoginButton_Click" ToolTip="Click here to log in."/>
         <Label x:Name="FromLabel" Content="From:" HorizontalAlignment="Left" Margin="195,35,0,0" VerticalAlignment="Top" FontSize="16" Width="75" BorderThickness="1"/>
         <TextBox x:Name="FromTextBox" Margin="275,35,25,402" TextWrapping="Wrap" FontSize="17" Focusable="False"/>
+        <Button x:Name="ReportAnIssueButton" Content="Report a bug" HorizontalAlignment="Left" Margin="10,418,0,0" VerticalAlignment="Top" Width="110" FontSize="16" Click="ReportAnIssueButton_Click" TabIndex="5" ToolTip="Click here to report a bug."/>
+        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="90,50,0,0" VerticalAlignment="Top" Width="90" FontSize="16" Click="ExitButton_Click" ToolTip="Click here to exit."/>
 
     </Grid>
 </Window>

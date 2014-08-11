@@ -59,16 +59,6 @@ namespace C_Mail_2._0
         }
 
         /// <summary>
-        /// Opens a new tab in your default browser where you can report your issue when the button is clicked
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ReportAnIssueButton_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start("https://github.com/Tijndagamer/C-Mail/issues/new");
-        }
-
-        /// <summary>
         /// When the AddAttachmentButton is clicked, show the AddAttachmentpopup
         /// </summary>
         /// <param name="sender"></param>

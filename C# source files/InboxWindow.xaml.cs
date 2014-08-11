@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
+using System.Diagnostics;
 using OpenPop.Pop3;
 using OpenPop.Mime;
 
@@ -36,6 +37,21 @@ namespace C_Mail_2._0
             
             // Show it
             SendMail.Show();
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        /// <summary>
+        /// Opens a new tab in your default browser where you can report your issue when the button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReportAnIssueButton_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/Tijndagamer/C-Mail/issues/new");
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
@@ -90,5 +106,7 @@ namespace C_Mail_2._0
                 loginPopup.Show();
             }
         }
+
+
     }
 }
