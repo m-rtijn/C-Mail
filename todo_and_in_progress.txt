@@ -1,16 +1,23 @@
-TO DO:
+** TO DO **
 
 - Add documentation
+  - GitHub wiki
+  - Documentation on the website
 - Creating a website for the program
 - Adding the todo list to the website
-- Update the graphics?
-- Add inbox
+- Update the graphics
+- Add different folders
+  - Inbox
+  - Sent
+  - Drag and drop folders
 - Make a logo
 - Add .ico
 - Update the wiki
 - Add BCC option
+- Make an icon for the program and the website
 
-In progress:
+
+** IN PROGRESS **
 
 - More noob-proofing (exception handling, testing etc)
 - Working on the website for the program
