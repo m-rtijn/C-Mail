@@ -30,6 +30,8 @@ namespace C_Mail_2._0
 
             // Show the popup
             popup.Show();
+
+            // Make the popup active
             popup.Activate();
         }
 
@@ -47,6 +49,8 @@ namespace C_Mail_2._0
 
             // Show the error
             Error.Show();
+
+            // Make the error popup active
             Error.Activate();
         }
 
@@ -68,11 +72,22 @@ namespace C_Mail_2._0
                 // Create a new instance of the SmtpClient class
                 SmtpClient smtpClient = new SmtpClient
                 {
+                    // Set the host
                     Host = Host,
+
+                    // Set the port
                     Port = Port,
+
+                    // Enable SSL
                     EnableSsl = true,
+
+                    // Assign the delivery method
                     DeliveryMethod = SmtpDeliveryMethod.Network,
+
+                    // Assign the credentials
                     Credentials = new NetworkCredential(FromAddress, FromPass),
+
+                    // Set the timeout
                     Timeout = 20000
                 };
 
