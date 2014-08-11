@@ -55,7 +55,7 @@ namespace C_Mail_2._0
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            Close();
         }
 
         /// <summary>
