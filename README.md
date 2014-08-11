@@ -15,3 +15,5 @@ List of supported hosts
 
 - Gmail
 - Yahoo mail
+
+<i>More coming soon</i>
