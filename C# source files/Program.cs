@@ -276,8 +276,13 @@ namespace C_Mail_2._0
                     AllMessages.Add(client.GetMessage(i));
                 }
 
+                // Disconnect from the server
+                client.Disconnect();
+
                 // Return the messages
                 return AllMessages;
+
+                
             }
         }
 

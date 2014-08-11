@@ -45,7 +45,9 @@ namespace C_Mail_2._0
             // Retrieve all the messages
             AllMessages = Program.RetrieveAllMessages("pop.gmail.com", 995, Program.FromAddress, Program.FromPass, true);
 
-            EmailBodyTextBox.Text = AllMessages[Program.MessageCount].MessagePart.ToString();
+            // Apperantly MessageCount is 0. fml.
+            EmailBodyTextBox.Text = Program.MessageCount.ToString();
+            
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
