@@ -1,0 +1,14 @@
+﻿<Window x:Class="C_Mail_2._0.InboxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="C-Mail" Height="500" Width="700">
+    <Grid>
+        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="RefreshButton_Click"/>
+        <Button x:Name="SendEmailButton" Content="Send email" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="90" FontSize="16" Click="SendEmailButton_Click"/>
+        <Label x:Name="SubjectSubjectLabel" Content="Subject:" HorizontalAlignment="Left" Margin="200,74,0,0" VerticalAlignment="Top" FontSize="16" Width="75" BorderThickness="1"/>
+        <TextBox x:Name="SubjectTextBox" Height="33" Margin="275,74,25,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="17" Focusable="False"/>
+        <TextBox x:Name="EmailBodyTextBox" Margin="200,120,25,25" TextWrapping="Wrap" Focusable="False" FontSize="16"/>
+        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="LoginButton_Click"/>
+
+    </Grid>
+</Window>

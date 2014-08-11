@@ -8,6 +8,8 @@ using System.Net.Mail;
 using System.Threading;
 using System.IO;
 using System.Diagnostics;
+using OpenPop.Pop3;
+using OpenPop.Mime;
 
 namespace C_Mail_2._0
 {
@@ -54,7 +56,7 @@ namespace C_Mail_2._0
             Error.Activate();
         }
 
-        // Email methods
+        // Send email methods
 
         /// <summary>
         /// Sends an email
@@ -147,8 +149,6 @@ namespace C_Mail_2._0
             }
         }
 
-        // Check methods
-
         /// <summary>
         /// Checks the host and if the enterd FromAddress is actually an address.
         /// </summary>
@@ -205,6 +205,58 @@ namespace C_Mail_2._0
             {
                 ErrorPopupCall("ERROR 30003" + "\n" + "Description: one of the given arguments is null or empty.");
                 return false;
+            }
+        }
+
+        // Receive email methods
+
+        /// <summary>
+        /// Retrieves all the messages on the server
+        /// </summary>
+        /// <param name="Host">The host server</param>
+        /// <param name="Port">The POP3 port of the host server</param>
+        /// <param name="FromAddress">Your username</param>
+        /// <param name="FromPass">Your password</param>
+        /// <param name="UseSSL">UseSSL yes or no</param>
+        /// <returns>All the messages on the server</returns>
+        public static List<Message> RetrieveAllMessages(string Host, int Port, string FromAddress, string FromPass, bool UseSSL)
+        {
+            using(Pop3Client client = new Pop3Client())
+            {
+                // Create a list to store our messages in
+                List<Message> AllMessages = new List<Message>();
+
+                // Connect to the server
+                try
+                {
+                    client.Connect(Host, Port, UseSSL);
+                }
+                catch (Exception exception)
+                {
+                    // Create the error message
+                    string ErrorMessage = "ERROR 60001" + "\n" + exception.ToString();
+
+                    // Show the error message
+                    Program.ErrorPopupCall(ErrorMessage);
+
+                    // Stop executing this method
+                    return AllMessages;
+                }
+
+                // Authenticate to the server
+                client.Authenticate(FromAddress, FromPass);
+
+                // Get number of messages in the inbox
+                int MessageCount = client.GetMessageCount();
+
+                // Get all the messages
+                for(int i = MessageCount; i > 0; i--)
+                {
+                    AllMessages.Add(client.GetMessage(i));
+                }
+
+                // Return the messages
+                return AllMessages;
             }
         }
 
