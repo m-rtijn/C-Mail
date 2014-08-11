@@ -11,6 +11,7 @@
 - Update the wiki
 - Add BCC option
 - Make an icon for the program and the website
+- Add Logged in popup
 
 
 ** IN PROGRESS **
