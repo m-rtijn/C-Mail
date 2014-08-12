@@ -54,13 +54,18 @@ namespace C_Mail_2._0
             Process.Start("https://github.com/Tijndagamer/C-Mail/issues/new");
         }
 
+        /// <summary>
+        /// Shows the newest email in your inbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
             // Create a list to store the messages in
             List<Message> AllMessages = new List<Message>();
 
             // Retrieve all the messages
-            AllMessages = Program.RetrieveAllMessages("pop.gmail.com", 995, Program.FromAddress, Program.FromPass, true);
+            AllMessages = Program.RetrieveAllMessages(Program.FromAddress, Program.FromPass, true);
 
             try
             {
@@ -106,7 +111,5 @@ namespace C_Mail_2._0
                 loginPopup.Show();
             }
         }
-
-
     }
 }

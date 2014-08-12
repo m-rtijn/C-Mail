@@ -11,6 +11,8 @@ using System.Net.Mail;
 using OpenPop.Pop3;
 using OpenPop.Mime;
 
+// This is where the magic happens
+
 namespace C_Mail_2._0
 {
     class Program
@@ -154,7 +156,7 @@ namespace C_Mail_2._0
         /// Checks the host and if the enterd FromAddress is actually an address.
         /// </summary>
         /// <param name="FromAddress">The address of the sender of the email</param>
-        private static bool CheckEmailHost(string FromAddress) // Checks the host
+        private static bool CheckEmailHost(string FromAddress)
         {
             // First split the FromAddress between the @
             string[] splitFromAddress = FromAddress.Split('@');
@@ -183,7 +185,6 @@ namespace C_Mail_2._0
                 ErrorPopupCall("ERROR 30001" + "\n" + "Description: splitFromAddress[1] does not exists.");
                 return false;
             }
-
         }
 
         /// <summary>
@@ -220,8 +221,24 @@ namespace C_Mail_2._0
         /// <param name="FromPass">Your password</param>
         /// <param name="UseSSL">UseSSL yes or no</param>
         /// <returns>All the messages on the server</returns>
-        public static List<Message> RetrieveAllMessages(string Host, int Port, string FromAddress, string FromPass, bool UseSSL)
+        public static List<Message> RetrieveAllMessages(string FromAddress, string FromPass, bool UseSSL)
         {
+            // Check the host
+            CheckEmailHostPOP(FromAddress);
+
+            // Declare variables
+            string Address;
+
+            // Check if the host is gmail, because gmail has to be special -_-
+            if (Host == "pop.gmail.com")
+            {
+                Address = "recent:" + FromAddress;
+            }
+            else
+            {
+                Address = FromAddress;
+            }
+
             using(Pop3Client client = new Pop3Client())
             {
                 // Connect to the server
@@ -247,7 +264,7 @@ namespace C_Mail_2._0
                 // Authenticate to the server
                 try
                 {
-                    client.Authenticate(FromAddress, FromPass);
+                    client.Authenticate(Address, FromPass);
                 }
                 catch (Exception exception)
                 {
@@ -281,8 +298,41 @@ namespace C_Mail_2._0
 
                 // Return the messages
                 return AllMessages;
+            }
+        }
 
-                
+        /// <summary>
+        /// Checks the host for the POP3 protocol used for the inbox
+        /// </summary>
+        /// <param name="FromAddress"></param>
+        private static void CheckEmailHostPOP(string FromAddress)
+        {
+            // First split the FromAddress between the @
+            string[] splitFromAddress = FromAddress.Split('@');
+
+            // Then check if the splitFromAddress[1] exists
+            if (splitFromAddress.Length == 2)
+            {
+                // This switch checks which host it is, and assigns the Host and Port variables to the corresponding Host and Port
+                switch (splitFromAddress[1])
+                {
+                    case "gmail.com":
+                        Host = "pop.gmail.com";
+                        Port = 995;
+                        return;
+                    case "yahoo.com":
+                        Host = "pop.mail.yahoo.com";
+                        Port = 995;
+                        return;
+                    default:
+                        ErrorPopupCall("ERROR 30002" + "\n" + "Description: reached default in switch(splitFromAddres[1])");
+                        return;
+                }
+            }
+            else
+            {
+                ErrorPopupCall("ERROR 30001" + "\n" + "Description: splitFromAddress[1] does not exists.");
+                return;
             }
         }
 
@@ -297,7 +347,7 @@ namespace C_Mail_2._0
         /// <param name="EncryptionPassword">The password used for the encryption</param>
         public static void WriteCredentialsToFile(string FromAddress, string FromPass, string Path, string EncryptionPassword)
         {
-            // declare variables
+            // Declare variables
             string EncryptedFromAddress, EncryptedFromPass;
 
             // Create a new instance of the FileStream class

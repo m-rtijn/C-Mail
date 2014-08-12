@@ -9,3 +9,6 @@ Solution: Check again if you have filled in ALL the TextBoxes, and the PasswordB
 
 Error 40002:
 Solution: Wrong password given
+
+Error 70001:
+Solution: There are no (new) emails in your inbox.
