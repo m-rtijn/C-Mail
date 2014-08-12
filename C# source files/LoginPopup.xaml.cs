@@ -58,12 +58,6 @@ namespace C_Mail_2._0
                 }
             }
 
-            // If the login is succesfull, show the popup
-            if (!(string.IsNullOrEmpty(Program.FromAddress)) && !(string.IsNullOrEmpty(Program.FromPass)))
-            {
-                Program.LoggedInPopupCall();
-            }
-
             // Close the window
             Close();
         }

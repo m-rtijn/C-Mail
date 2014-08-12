@@ -59,15 +59,6 @@ namespace C_Mail_2._0
             Error.Activate();
         }
 
-        public static void LoggedInPopupCall()
-        {
-            // Create a new instance of LoginConfirmedPopup 
-            LoginConfirmedPopup popup = new LoginConfirmedPopup();
-
-            // Show the popup
-            popup.Show();
-        }
-
         // Send email methods
 
         /// <summary>
