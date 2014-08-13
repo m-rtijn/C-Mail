@@ -15,5 +15,6 @@ List of supported hosts
 
 - Gmail
 - Yahoo mail
+- Hotmail (.com and .nl)
 
 <i>More coming soon</i>
