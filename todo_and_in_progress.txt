@@ -2,11 +2,9 @@
 
 - Add documentation
   - GitHub wiki
-  - Documentation on the website
 - Creating a website for the program
 - Adding the todo list to the website
 - Update the graphics
-- Make a logo
 - Add .ico
 - Update the wiki
 - Add BCC option
