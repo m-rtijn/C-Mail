@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Mail;
 using OpenPop.Pop3;
 using OpenPop.Mime;
+using S22.Imap;
 
 // This is where the magic happens
 
@@ -365,13 +366,13 @@ namespace C_Mail_2._0
                         Port = 995;
                         return true;
                     default:
-                        ErrorPopupCall("ERROR 30002" + "\n" + "Description: reached default in switch(splitFromAddres[1])");
+                        ErrorPopupCall("ERROR 60004" + "\n" + "Description: reached default in switch(splitFromAddres[1])");
                         return false;
                 }
             }
             else
             {
-                ErrorPopupCall("ERROR 30001" + "\n" + "Description: splitFromAddress[1] does not exists.");
+                ErrorPopupCall("ERROR 60005" + "\n" + "Description: splitFromAddress[1] does not exists.");
                 return false;
             }
         }
@@ -435,6 +436,23 @@ namespace C_Mail_2._0
             // Assign the variables
             FromAddress = DecryptedData[0];
             FromPass = DecryptedData[1];
+        }
+
+        //  IN PROGRESS METHODS, USE WITH CAUTION
+
+        public static IEnumerable<MailMessage> GetAllUnseenMessages(string FromAddress, string FromPass)
+        {
+            // Create a new ImapClient
+            ImapClient client = new ImapClient("imap.gmail.com", 993, FromAddress, FromPass, AuthMethod.Login, true);
+
+            // Get the uids
+            IEnumerable<uint> uids = client.Search(SearchCondition.Unseen());
+
+            // Get the messages
+            IEnumerable<MailMessage> Messages = client.GetMessages(uids);
+
+            // Return them
+            return Messages;
         }
     }
 }

@@ -13,8 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using System.Diagnostics;
+using System.Net.Mail;
 using OpenPop.Pop3;
 using OpenPop.Mime;
+using S22.Imap;
 
 namespace C_Mail_2._0
 {
@@ -61,11 +63,14 @@ namespace C_Mail_2._0
         /// <param name="e"></param>
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
+            /*
             // Create a list to store the messages in
             List<Message> AllMessages = new List<Message>();
 
             // Retrieve all the messages
             AllMessages = Program.RetrieveAllMessages(Program.FromAddress, Program.FromPass, true);
+
+            FromTextBox.Text = Program.MessageCount.ToString();
 
             try
             {
@@ -89,6 +94,14 @@ namespace C_Mail_2._0
                 // Stop executing this method
                 return;
             }
+             */
+
+            IEnumerable<MailMessage> Messages = Program.GetAllUnseenMessages(Program.FromAddress, Program.FromPass);
+
+            List<MailMessage> MessagesList = Messages.ToList<MailMessage>();
+
+            EmailBodyTextBox.Text = MessagesList[1].Body;
+
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
