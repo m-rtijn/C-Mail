@@ -244,7 +244,7 @@ namespace C_Mail_2._0
                     ImapClient client = new ImapClient(Host, Port, FromAddress, FromPass, AuthMethod.Login, true);
 
                     // Get the uids
-                    IEnumerable<uint> uids = client.Search(SearchCondition.Unseen());
+                    IEnumerable<uint> uids = client.Search(SearchCondition.All());
 
                     // Get the messages
                     IEnumerable<MailMessage> Messages = client.GetMessages(uids);
@@ -306,15 +306,15 @@ namespace C_Mail_2._0
                         Port = 993;
                         return true;
                     case "yahoo.com":
-                        Host = "-.mail.yahoo.com";
+                        Host = "imap.mail.yahoo.com";
                         Port = 993;
                         return true;
                     case "hotmail.com":
-                        Host = "-.live.com";
+                        Host = "imap-mail.outlook.com";
                         Port = 993;
                         return true;
                     case "hotmail.nl":
-                        Host = "-.live.com";
+                        Host = "imap-mail.outlook.com";
                         Port = 993;
                         return true;
                     default:

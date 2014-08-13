@@ -4,7 +4,7 @@
         Title="C-Mail" Height="131" Width="240" ResizeMode="NoResize">
     <Grid>
         <Label Content="The email has been sent!" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Button x:Name="CloseButton" Content="Close" Margin="75,60,75,0" VerticalAlignment="Top" FontSize="16" Click="CloseButton_Click" TabIndex="1" ToolTip="Click here to close this window."/>
+        <Button x:Name="CloseButton" Content="Close" Margin="75,60,75,0" VerticalAlignment="Top" FontSize="16" Click="CloseButton_Click" TabIndex="1" ToolTip="Click here to close this window." IsDefault="True"/>
 
     </Grid>
 </Window>

@@ -70,13 +70,13 @@ namespace C_Mail_2._0
             try
             {
                 // Show the sender of the last received email
-                FromTextBox.Text = Messages[MessageCount].From.ToString();
+                FromTextBox.Text = Messages[MessageCount - 1].From.ToString();
 
                 // Show the subject of the last received email
-                SubjectTextBox.Text = Messages[MessageCount].Subject.ToString();
+                SubjectTextBox.Text = Messages[MessageCount - 1].Subject.ToString();
 
                 // Show the body of the last received email
-                EmailBodyTextBox.Text = Messages[MessageCount].Body.ToString();
+                EmailBodyTextBox.Text = Messages[MessageCount - 1].Body.ToString();
             }
             catch (Exception exception)
             {
