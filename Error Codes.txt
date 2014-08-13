@@ -1,14 +1,41 @@
-Error 30001: Description: splitFromAddress[1] does not exists.
+Error 20001: Something went wrong when sending the Message in SendEmail()
+Solution: There may be some internet connection troubles
+
+Error 30001: splitFromAddress[1] does not exists.
 Solution: The given email address does not contain an "@", please check your email address again
 
-Error 30002: Description: reached default in switch(splitFromAddres[1])
-Solution: The server of the sender of the email is not recognized and/or not supported.
+Error 30002: reached default in switch(splitFromAddres[1])
+Solution: Sorry, your host is not supported, please open a new issue to request the addition of this host. Please add in this issue the SMTP host, STMP port, POP3 host and POP3 port
 
-Error 30003: Description: One of the given arguments is null or empty.
-Solution: Check again if you have filled in ALL the TextBoxes, and the PasswordBox
+Error 30003: One of the given arguments is null or empty.
+Solution: Check again if you have filled in ALL the TextBoxes, and the PasswordBox (except for CC)
+
+Error 40001:
+Solution: Something went wrong in the EnryptionClass.Encrypt method
 
 Error 40002:
-Solution: Wrong password given
+Solution: Wrong encryption password given
+
+Error 50001: Something went wrong when writing the encrypted credentials to a file
+Solution: Please open a new issue, tagged as "bug", and explain what you did before the error occured
+
+Error 50001: Something went wrong when reading the encrypted credentials from a file
+Solution: Please open a new issue, tagged as "bug", and explain what you did before the error occured
+
+Error 60001: Could not connect to pop server
+Solution: The POP3 server or your internet connection is down, or the host server doesn't exist (anymore)
+
+Error 60002: Wrong Address and/or FromPass
+Solution: Be sure the filled in login credentials are the correct ones
+
+Error 60003: EmailHostPOP(FromAddress) returned false
+Solution: The filled in FromAddress does not contain an "@" (Paired with error 60005) or your host is not supported (Paired with error 60004)
+
+Error 60004: reached default in switch(splitFromAddres[1])
+Solution: Sorry, your host is not supported, please open a new issue to request the addition of this host. Please add in this issue the SMTP host, STMP port, POP3 host and POP3 port
+
+Error 60005: splitFromAddress[1] does not exists.
+Solution: The filled in FromAddress does not contain an "@"
 
 Error 70001:
-Solution: There are no (new) emails in your inbox.
+Solution: There are no (new) emails in your inbox, or POP3 acts like annoys everyone again.
