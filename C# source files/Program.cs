@@ -8,8 +8,6 @@ using System.IO;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Mail;
-using OpenPop.Pop3;
-using OpenPop.Mime;
 using S22.Imap;
 
 // This is where the magic happens
@@ -22,7 +20,6 @@ namespace C_Mail_2._0
         private static string Host = "";
         private static int Port = 0;
         public static string FromAddress, FromPass;
-        public static int MessageCount;
 
         // Popup call methods
 
@@ -231,103 +228,58 @@ namespace C_Mail_2._0
         // Receive email methods
 
         /// <summary>
-        /// Retrieves all the messages on the server
+        /// Retrieves all the unseen messages from the server
         /// </summary>
-        /// <param name="Host">The host server</param>
-        /// <param name="Port">The POP3 port of the host server</param>
-        /// <param name="FromAddress">Your username</param>
-        /// <param name="FromPass">Your password</param>
-        /// <param name="UseSSL">UseSSL yes or no</param>
-        /// <returns>All the messages on the server</returns>
-        public static List<Message> RetrieveAllMessages(string FromAddress, string FromPass, bool UseSSL)
+        /// <param name="FromAddress">User's email address</param>
+        /// <param name="FromPass">User's password</param>
+        /// <returns>All the retrieved messages</returns>
+        public static List<MailMessage> GetAllUnseenMessages(string FromAddress, string FromPass)
         {
             // Check the host
-            if (CheckEmailHostPOP(FromAddress) == true)
+            if (CheckEmailHostIMAP(FromAddress) == true && !(string.IsNullOrEmpty(FromPass)))
             {
-                // Declare variables
-                string Address;
-
-                // Check if the host is gmail, because gmail has to be special -_-
-                if (Host == "pop.gmail.com")
+                try
                 {
-                    Address = "recent:" + FromAddress;
+                    // Create a new ImapClient
+                    ImapClient client = new ImapClient(Host, Port, FromAddress, FromPass, AuthMethod.Login, true);
+
+                    // Get the uids
+                    IEnumerable<uint> uids = client.Search(SearchCondition.Unseen());
+
+                    // Get the messages
+                    IEnumerable<MailMessage> Messages = client.GetMessages(uids);
+
+                    // Convert to list
+                    List<MailMessage> MessagesList = Messages.ToList<MailMessage>();
+
+                    // Return them
+                    return MessagesList;
                 }
-                else
+                catch (Exception exception)
                 {
-                    Address = FromAddress;
-                }
+                    // Create the error message
+                    string ErrorMessage = "ERROR 60003" + "\n" + exception.ToString();
 
-                using (Pop3Client client = new Pop3Client())
-                {
-                    // Connect to the server
-                    try
-                    {
-                        client.Connect(Host, Port, UseSSL);
-                    }
-                    catch (Exception exception)
-                    {
-                        // Create the error message
-                        string ErrorMessage = "ERROR 60001" + "\n" + exception.ToString();
+                    // Show the error message
+                    Program.ErrorPopupCall(ErrorMessage);
 
-                        // Show the error message
-                        Program.ErrorPopupCall(ErrorMessage);
+                    // Make an empty list to return
+                    List<MailMessage> Stop = new List<MailMessage>();
 
-                        // Make an empty list to return
-                        List<Message> Stop = new List<Message>(1);
-
-                        // Stop executing this method
-                        return Stop;
-                    }
-
-                    // Authenticate to the server
-                    try
-                    {
-                        client.Authenticate(Address, FromPass);
-                    }
-                    catch (Exception exception)
-                    {
-                        // Create the error message
-                        string ErrorMessage = "ERROR 60002" + "\n" + exception.ToString();
-
-                        // Show the error message
-                        Program.ErrorPopupCall(ErrorMessage);
-
-                        // Make an empty list to return
-                        List<Message> Stop = new List<Message>(1);
-
-                        // Stop executing this method
-                        return Stop;
-                    }
-
-                    // Get number of messages in the inbox
-                    MessageCount = client.GetMessageCount();
-
-                    // Create a list to store our messages in
-                    List<Message> AllMessages = new List<Message>(MessageCount);
-
-                    // Get all the messages
-                    for (int i = MessageCount; i > 0; i--)
-                    {
-                        AllMessages.Add(client.GetMessage(i));
-                    }
-
-                    // Disconnect from the server
-                    client.Disconnect();
-
-                    // Return the messages
-                    return AllMessages;
+                    // Stop executing this method
+                    return Stop;
                 }
             }
             else
             {
                 // Create the error message
-                string ErrorMessage = "ERROR 60003" + "\n" + "EmailHostPOP(FromAddress) returned false";
+                string ErrorMessage = "ERROR 60003" + "\n" + "EmailHostIMAP(FromAddress) returned false";
 
                 // Show the error message
                 Program.ErrorPopupCall(ErrorMessage);
 
                 // Make an empty list to return
-                List<Message> Stop = new List<Message>(1);
+                List<MailMessage> Stop = new List<MailMessage>();
 
                 // Stop executing this method
                 return Stop;
@@ -338,7 +290,7 @@ namespace C_Mail_2._0
         /// Checks the host for the POP3 protocol used for the inbox
         /// </summary>
         /// <param name="FromAddress"></param>
-        private static bool CheckEmailHostPOP(string FromAddress)
+        private static bool CheckEmailHostIMAP(string FromAddress)
         {
             // First split the FromAddress between the @
             string[] splitFromAddress = FromAddress.Split('@');
@@ -350,20 +302,20 @@ namespace C_Mail_2._0
                 switch (splitFromAddress[1])
                 {
                     case "gmail.com":
-                        Host = "pop.gmail.com";
-                        Port = 995;
+                        Host = "imap.gmail.com";
+                        Port = 993;
                         return true;
                     case "yahoo.com":
-                        Host = "pop.mail.yahoo.com";
-                        Port = 995;
+                        Host = "-.mail.yahoo.com";
+                        Port = 993;
                         return true;
                     case "hotmail.com":
-                        Host = "pop3.live.com";
-                        Port = 995;
+                        Host = "-.live.com";
+                        Port = 993;
                         return true;
                     case "hotmail.nl":
-                        Host = "pop3.live.com";
-                        Port = 995;
+                        Host = "-.live.com";
+                        Port = 993;
                         return true;
                     default:
                         ErrorPopupCall("ERROR 60004" + "\n" + "Description: reached default in switch(splitFromAddres[1])");
@@ -436,23 +388,6 @@ namespace C_Mail_2._0
             // Assign the variables
             FromAddress = DecryptedData[0];
             FromPass = DecryptedData[1];
-        }
-
-        //  IN PROGRESS METHODS, USE WITH CAUTION
-
-        public static IEnumerable<MailMessage> GetAllUnseenMessages(string FromAddress, string FromPass)
-        {
-            // Create a new ImapClient
-            ImapClient client = new ImapClient("imap.gmail.com", 993, FromAddress, FromPass, AuthMethod.Login, true);
-
-            // Get the uids
-            IEnumerable<uint> uids = client.Search(SearchCondition.Unseen());
-
-            // Get the messages
-            IEnumerable<MailMessage> Messages = client.GetMessages(uids);
-
-            // Return them
-            return Messages;
         }
     }
 }

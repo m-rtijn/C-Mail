@@ -14,8 +14,6 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Diagnostics;
 using System.Net.Mail;
-using OpenPop.Pop3;
-using OpenPop.Mime;
 using S22.Imap;
 
 namespace C_Mail_2._0
@@ -63,25 +61,22 @@ namespace C_Mail_2._0
         /// <param name="e"></param>
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            // Create a list to store the messages in
-            List<Message> AllMessages = new List<Message>();
+            // Get all the unseen messages
+            List<MailMessage> Messages = Program.GetAllUnseenMessages(Program.FromAddress, Program.FromPass);
 
-            // Retrieve all the messages
-            AllMessages = Program.RetrieveAllMessages(Program.FromAddress, Program.FromPass, true);
-
-            FromTextBox.Text = Program.MessageCount.ToString();
+            // Get the messagecount
+            int MessageCount = Messages.Count;
 
             try
             {
                 // Show the sender of the last received email
-                FromTextBox.Text = AllMessages[Program.MessageCount].Headers.Sender.ToString();
+                FromTextBox.Text = Messages[MessageCount].From.ToString();
 
                 // Show the subject of the last received email
-                SubjectTextBox.Text = AllMessages[Program.MessageCount].Headers.Subject.ToString();
+                SubjectTextBox.Text = Messages[MessageCount].Subject.ToString();
 
                 // Show the body of the last received email
-                EmailBodyTextBox.Text = AllMessages[Program.MessageCount].MessagePart.ToString();
+                EmailBodyTextBox.Text = Messages[MessageCount].Body.ToString();
             }
             catch (Exception exception)
             {
@@ -94,14 +89,6 @@ namespace C_Mail_2._0
                 // Stop executing this method
                 return;
             }
-             */
-
-            IEnumerable<MailMessage> Messages = Program.GetAllUnseenMessages(Program.FromAddress, Program.FromPass);
-
-            List<MailMessage> MessagesList = Messages.ToList<MailMessage>();
-
-            EmailBodyTextBox.Text = MessagesList[1].Body;
-
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
