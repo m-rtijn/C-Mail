@@ -9,6 +9,7 @@
 - Update the wiki
 - Add BCC option
 - Make an icon for the program and the website
+- Add screenshots to the website
 
 
 ** IN PROGRESS **

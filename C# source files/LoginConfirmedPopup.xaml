@@ -4,7 +4,7 @@
         Title="Login" Height="200" Width="200">
     <Grid>
         <Label x:Name="LoggedInConfirmedTextLabel" Content="Logged in!" Margin="50,25,42,90" FontSize="16"/>
-        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="50,108,0,0" VerticalAlignment="Top" Width="100" FontSize="16" Click="CloseButton_Click"/>
+        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="50,108,0,0" VerticalAlignment="Top" Width="100" FontSize="16" Click="CloseButton_Click" IsDefault="True"/>
 
     </Grid>
 </Window>
