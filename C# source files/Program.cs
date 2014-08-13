@@ -184,6 +184,14 @@ namespace C_Mail_2._0
                         Host = "smtp.mail.yahoo.com";
                         Port = 465;
                         return true;
+                    case "hotmail.com":
+                        Host = "smtp.live.com";
+                        Port = 587;
+                        return true;
+                    case "hotmail.nl":
+                        Host = "smtp.live.com";
+                        Port = 587;
+                        return true;
                     default:
                         ErrorPopupCall("ERROR 30002" + "\n" + "Description: reached default in switch(splitFromAddres[1])");
                         return false;
@@ -233,80 +241,95 @@ namespace C_Mail_2._0
         public static List<Message> RetrieveAllMessages(string FromAddress, string FromPass, bool UseSSL)
         {
             // Check the host
-            CheckEmailHostPOP(FromAddress);
-
-            // Declare variables
-            string Address;
-
-            // Check if the host is gmail, because gmail has to be special -_-
-            if (Host == "pop.gmail.com")
+            if (CheckEmailHostPOP(FromAddress) == true)
             {
-                Address = "recent:" + FromAddress;
+                // Declare variables
+                string Address;
+
+                // Check if the host is gmail, because gmail has to be special -_-
+                if (Host == "pop.gmail.com")
+                {
+                    Address = "recent:" + FromAddress;
+                }
+                else
+                {
+                    Address = FromAddress;
+                }
+
+                using (Pop3Client client = new Pop3Client())
+                {
+                    // Connect to the server
+                    try
+                    {
+                        client.Connect(Host, Port, UseSSL);
+                    }
+                    catch (Exception exception)
+                    {
+                        // Create the error message
+                        string ErrorMessage = "ERROR 60001" + "\n" + exception.ToString();
+
+                        // Show the error message
+                        Program.ErrorPopupCall(ErrorMessage);
+
+                        // Make an empty list to return
+                        List<Message> Stop = new List<Message>(1);
+
+                        // Stop executing this method
+                        return Stop;
+                    }
+
+                    // Authenticate to the server
+                    try
+                    {
+                        client.Authenticate(Address, FromPass);
+                    }
+                    catch (Exception exception)
+                    {
+                        // Create the error message
+                        string ErrorMessage = "ERROR 60002" + "\n" + exception.ToString();
+
+                        // Show the error message
+                        Program.ErrorPopupCall(ErrorMessage);
+
+                        // Make an empty list to return
+                        List<Message> Stop = new List<Message>(1);
+
+                        // Stop executing this method
+                        return Stop;
+                    }
+
+                    // Get number of messages in the inbox
+                    MessageCount = client.GetMessageCount();
+
+                    // Create a list to store our messages in
+                    List<Message> AllMessages = new List<Message>(MessageCount);
+
+                    // Get all the messages
+                    for (int i = MessageCount; i > 0; i--)
+                    {
+                        AllMessages.Add(client.GetMessage(i));
+                    }
+
+                    // Disconnect from the server
+                    client.Disconnect();
+
+                    // Return the messages
+                    return AllMessages;
+                }
             }
             else
             {
-                Address = FromAddress;
-            }
+                // Create the error message
+                string ErrorMessage = "ERROR 60003" + "\n" + "EmailHostPOP(FromAddress) returned false";
 
-            using(Pop3Client client = new Pop3Client())
-            {
-                // Connect to the server
-                try
-                {
-                    client.Connect(Host, Port, UseSSL);
-                }
-                catch (Exception exception)
-                {
-                    // Create the error message
-                    string ErrorMessage = "ERROR 60001" + "\n" + exception.ToString();
+                // Show the error message
+                Program.ErrorPopupCall(ErrorMessage);
 
-                    // Show the error message
-                    Program.ErrorPopupCall(ErrorMessage);
+                // Make an empty list to return
+                List<Message> Stop = new List<Message>(1);
 
-                    // Make an empty list to return
-                    List<Message> Stop = new List<Message>(1);
-
-                    // Stop executing this method
-                    return Stop;
-                }
-
-                // Authenticate to the server
-                try
-                {
-                    client.Authenticate(Address, FromPass);
-                }
-                catch (Exception exception)
-                {
-                    // Create the error message
-                    string ErrorMessage = "ERROR 60002" + "\n" + exception.ToString();
-
-                    // Show the error message
-                    Program.ErrorPopupCall(ErrorMessage);
-
-                    // Make an empty list to return
-                    List<Message> Stop = new List<Message>(1);
-
-                    // Stop executing this method
-                    return Stop;
-                }
-                
-                // Get number of messages in the inbox
-                MessageCount = client.GetMessageCount();
-
-                // Create a list to store our messages in
-                List<Message> AllMessages = new List<Message>(MessageCount);
-
-                // Get all the messages
-                for(int i = MessageCount; i > 0; i--)
-                {
-                    AllMessages.Add(client.GetMessage(i));
-                }
-
-                // Disconnect from the server
-                client.Disconnect();
-
-                // Return the messages
-                return AllMessages;
+                // Stop executing this method
+                return Stop;
             }
         }
 
@@ -314,7 +337,7 @@ namespace C_Mail_2._0
         /// Checks the host for the POP3 protocol used for the inbox
         /// </summary>
         /// <param name="FromAddress"></param>
-        private static void CheckEmailHostPOP(string FromAddress)
+        private static bool CheckEmailHostPOP(string FromAddress)
         {
             // First split the FromAddress between the @
             string[] splitFromAddress = FromAddress.Split('@');
@@ -328,20 +351,28 @@ namespace C_Mail_2._0
                     case "gmail.com":
                         Host = "pop.gmail.com";
                         Port = 995;
-                        return;
+                        return true;
                     case "yahoo.com":
                         Host = "pop.mail.yahoo.com";
                         Port = 995;
-                        return;
+                        return true;
+                    case "hotmail.com":
+                        Host = "pop3.live.com";
+                        Port = 995;
+                        return true;
+                    case "hotmail.nl":
+                        Host = "pop3.live.com";
+                        Port = 995;
+                        return true;
                     default:
                         ErrorPopupCall("ERROR 30002" + "\n" + "Description: reached default in switch(splitFromAddres[1])");
-                        return;
+                        return false;
                 }
             }
             else
             {
                 ErrorPopupCall("ERROR 30001" + "\n" + "Description: splitFromAddress[1] does not exists.");
-                return;
+                return false;
             }
         }
 
