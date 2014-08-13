@@ -233,7 +233,7 @@ namespace C_Mail_2._0
         /// <param name="FromAddress">User's email address</param>
         /// <param name="FromPass">User's password</param>
         /// <returns>All the retrieved messages</returns>
-        public static List<MailMessage> GetAllUnseenMessages(string FromAddress, string FromPass)
+        public static List<MailMessage> GetAllMessages(string FromAddress, string FromPass)
         {
             // Check the host
             if (CheckEmailHostIMAP(FromAddress) == true && !(string.IsNullOrEmpty(FromPass)))
