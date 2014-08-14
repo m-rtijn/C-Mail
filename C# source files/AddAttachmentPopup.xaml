@@ -1,12 +1,12 @@
 ﻿<Window x:Class="C_Mail_2._0.AddAttachmentPopup"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Add attachment" Height="150" Width="415">
+        Title="C-Mail - Add attachment" Height="150" Width="415">
     <Grid>
         <Label x:Name="FilepathLabel" Content="File path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
         <TextBox x:Name="AttachmentFilepathTextBox" HorizontalAlignment="Left" Height="31" Margin="89,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293" FontSize="16" TabIndex="1" Tag="" ToolTip="Fill in the filepath of your attachment here."/>
         <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="CloseButton_Click" TabIndex="6" ToolTip="Close this window."/>
-        <Button x:Name="EnterButton" Content="Enter" HorizontalAlignment="Left" Margin="307,75,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="EnterButton_Click" TabIndex="6" ToolTip="Add this attachment to your email."/>
+        <Button x:Name="EnterButton" Content="Add" HorizontalAlignment="Left" Margin="307,75,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="EnterButton_Click" TabIndex="6" ToolTip="Add this attachment to your email."/>
 
     </Grid>
 </Window>

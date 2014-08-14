@@ -1,7 +1,7 @@
 ﻿<Window x:Class="C_Mail_2._0.LoginPopup"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="LoginPopup" Height="230" Width="305" ResizeMode="NoResize">
+        Title="C-Mail - Login" Height="230" Width="305" ResizeMode="NoResize">
     <Grid>
         <Label x:Name="EmailLabel" Content="Email:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,0" FontSize="16"/>
         <TextBox x:Name="FromAddressTextBox" HorizontalAlignment="Left" Height="31" Margin="66,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" FontSize="16" TextChanged="FromAddressTextBox_TextChanged" TabIndex="1" ToolTip="Fill in your email address here."/>
