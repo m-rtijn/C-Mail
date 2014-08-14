@@ -258,7 +258,7 @@ namespace C_Mail_2._0
                 catch (Exception exception)
                 {
                     // Create the error message
-                    string ErrorMessage = "ERROR 60003" + "\n" + exception.ToString();
+                    string ErrorMessage = "ERROR 60002" + "\n" + exception.ToString();
 
                     // Show the error message
                     Program.ErrorPopupCall(ErrorMessage);
@@ -287,7 +287,7 @@ namespace C_Mail_2._0
         }
 
         /// <summary>
-        /// Checks the host for the POP3 protocol used for the inbox
+        /// Checks the host for the IMAP protocol used for the inbox
         /// </summary>
         /// <param name="FromAddress"></param>
         private static bool CheckEmailHostIMAP(string FromAddress)

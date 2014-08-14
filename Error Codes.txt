@@ -22,11 +22,8 @@ Solution: Please open a new issue, tagged as "bug", and explain what you did bef
 Error 50001: Something went wrong when reading the encrypted credentials from a file
 Solution: Please open a new issue, tagged as "bug", and explain what you did before the error occured
 
-Error 60001: Could not connect to pop server
-Solution: The POP3 server or your internet connection is down, or the host server doesn't exist (anymore)
-
 Error 60002: Wrong Address and/or FromPass
-Solution: Be sure the filled in login credentials are the correct ones
+Solution: Be sure the filled in login credentials are the correct ones and be sure to have an active internet connection
 
 Error 60003: EmailHostPOP(FromAddress) returned false
 Solution: The filled in FromAddress does not contain an "@" (Paired with error 60005) or your host is not supported (Paired with error 60004)

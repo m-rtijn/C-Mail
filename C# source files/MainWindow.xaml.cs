@@ -116,6 +116,9 @@ namespace C_Mail_2._0
 
             // Call SendEmail to send the email
             Program.SendEmail(ToAddress, Program.FromAddress, Program.FromPass, Subject, Body, CC, S_Attachment);
+
+            // Close this window
+            Close();
         }
     }
 }
