@@ -14,7 +14,6 @@
 
 ** IN PROGRESS **
 
-- Add an inbox (Used protocol for this is POP3, since there aren't any good IMAP4 libraries for .NET 4.5, it's added but it doesn't work for some reason...)
 - More noob-proofing (exception handling, testing etc)
 - Working on the website for the program
   - Going to implement a feedback system on the website instead of this file
