@@ -6,9 +6,9 @@ An email client in C# using WPF
 Usage
 =====
 
-To send an email, first login by clicking on the "Login"-button and filling in your email
-credentials. Then fill in the email address of the recipient, the subject and the body of 
-the email. When you're ready hit "Send!" to send your email.
+Before doing anything, be sure to log in. To send an email, click on "Send email" and fill in the recipient's address, subject and the body of the email. If you want you can also add an attachment and CC.
+
+To receive email, click "Refresh", this will show the last email you have received.
 
 List of supported hosts
 =======================
