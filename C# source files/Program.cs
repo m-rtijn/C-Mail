@@ -21,7 +21,9 @@ namespace C_Mail_2._0
         private static int Port = 0;
         public static string FromAddress, FromPass;
 
-        // Popup call methods
+        //####################
+        //#Popup call methods#
+        //####################
 
         /// <summary>
         /// Shows the EmailIsSentPopup popup
@@ -66,7 +68,9 @@ namespace C_Mail_2._0
             popup.Show();
         }
 
-        // Send email methods
+        //####################
+        //#Send email methods#
+        //####################
 
         /// <summary>
         /// Sends an email
@@ -225,7 +229,9 @@ namespace C_Mail_2._0
             }
         }
 
-        // Receive email methods
+        //#######################
+        //#Receive email methods#
+        //#######################
 
         /// <summary>
         /// Retrieves all the unseen messages from the server
@@ -292,8 +298,24 @@ namespace C_Mail_2._0
         /// <param name="FromAddress"></param>
         private static bool CheckEmailHostIMAP(string FromAddress)
         {
+            // Create splitFromAddress array to store the splitted FromAddress in
+            string[] splitFromAddress;
+
             // First split the FromAddress between the @
-            string[] splitFromAddress = FromAddress.Split('@');
+            try
+            {
+                splitFromAddress = FromAddress.Split('@');
+            }
+            catch (Exception exception)
+            {
+                // Create the error message
+                string ErrorMessage = "ERROR 60006" + "\n" + "FromAddress is empty." + exception.ToString();
+
+                // Show the error message
+                Program.ErrorPopupCall(ErrorMessage);
+
+                return false;
+            }
 
             // Then check if the splitFromAddress[1] exists
             if (splitFromAddress.Length == 2)
@@ -329,7 +351,9 @@ namespace C_Mail_2._0
             }
         }
 
-        // Writing and Reading methods
+        //#############################
+        //#Writing and Reading methods#
+        //#############################
 
         /// <summary>
         /// First encrypts, and then saves the login credentials to a file

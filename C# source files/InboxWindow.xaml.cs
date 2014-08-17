@@ -61,8 +61,11 @@ namespace C_Mail_2._0
         /// <param name="e"></param>
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
+            // Create a new list to store all the messages in
+            List<MailMessage> Messages = new List<MailMessage>();
+
             // Get all the unseen messages
-            List<MailMessage> Messages = Program.GetAllMessages(Program.FromAddress, Program.FromPass);
+            Messages = Program.GetAllMessages(Program.FromAddress, Program.FromPass);
 
             // Get the messagecount
             int MessageCount = Messages.Count;
