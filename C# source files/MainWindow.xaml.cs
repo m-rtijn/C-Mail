@@ -105,20 +105,27 @@ namespace C_Mail_2._0
         /// <param name="e"></param>
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            string ToAddress, Subject, Body, CC, S_Attachment;
+            if (!(string.IsNullOrEmpty(Program.FromAddress)))
+            {
+                string ToAddress, Subject, Body, CC, S_Attachment;
 
-            // Assign the variables
-            ToAddress = ToAddressTextBox.Text;
-            Subject = SubjectTextBox.Text;
-            Body = BodyTextBox.Text;
-            CC = CCAddressTextBox.Text;
-            S_Attachment = AddAttachmentPopup.AttachmentPath;
+                // Assign the variables
+                ToAddress = ToAddressTextBox.Text;
+                Subject = SubjectTextBox.Text;
+                Body = BodyTextBox.Text;
+                CC = CCAddressTextBox.Text;
+                S_Attachment = AddAttachmentPopup.AttachmentPath;
 
-            // Call SendEmail to send the email
-            Program.SendEmail(ToAddress, Program.FromAddress, Program.FromPass, Subject, Body, CC, S_Attachment);
+                // Call SendEmail to send the email
+                Program.SendEmail(ToAddress, Program.FromAddress, Program.FromPass, Subject, Body, CC, S_Attachment);
 
-            // Close this window
-            Close();
+                // Close this window
+                Close();
+            }
+            else
+            {
+                Program.ErrorPopupCall("Be sure to log in!");
+            }
         }
     }
 }

@@ -61,36 +61,43 @@ namespace C_Mail_2._0
         /// <param name="e"></param>
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            // Create a new list to store all the messages in
-            List<MailMessage> Messages = new List<MailMessage>();
-
-            // Get all the unseen messages
-            Messages = Program.GetAllMessages(Program.FromAddress, Program.FromPass);
-
-            // Get the messagecount
-            int MessageCount = Messages.Count;
-
-            try
+            if (!(string.IsNullOrEmpty(Program.FromAddress)))
             {
-                // Show the sender of the last received email
-                FromTextBox.Text = Messages[MessageCount - 1].From.ToString();
+                // Create a new list to store all the messages in
+                List<MailMessage> Messages = new List<MailMessage>();
 
-                // Show the subject of the last received email
-                SubjectTextBox.Text = Messages[MessageCount - 1].Subject.ToString();
+                // Get all the unseen messages
+                Messages = Program.GetAllMessages(Program.FromAddress, Program.FromPass);
 
-                // Show the body of the last received email
-                EmailBodyTextBox.Text = Messages[MessageCount - 1].Body.ToString();
+                // Get the messagecount
+                int MessageCount = Messages.Count;
+
+                try
+                {
+                    // Show the sender of the last received email
+                    FromTextBox.Text = Messages[MessageCount - 1].From.ToString();
+
+                    // Show the subject of the last received email
+                    SubjectTextBox.Text = Messages[MessageCount - 1].Subject.ToString();
+
+                    // Show the body of the last received email
+                    EmailBodyTextBox.Text = Messages[MessageCount - 1].Body.ToString();
+                }
+                catch (Exception exception)
+                {
+                    // Create the error message
+                    string ErrorMessage = "ERROR 70001" + "\n" + exception.ToString();
+
+                    // Show the error message
+                    Program.ErrorPopupCall(ErrorMessage);
+
+                    // Stop executing this method
+                    return;
+                }
             }
-            catch (Exception exception)
+            else
             {
-                // Create the error message
-                string ErrorMessage = "ERROR 70001" + "\n" + exception.ToString();
-
-                // Show the error message
-                Program.ErrorPopupCall(ErrorMessage);
-
-                // Stop executing this method
-                return;
+                Program.ErrorPopupCall("Be sure to log in!");
             }
         }
 
