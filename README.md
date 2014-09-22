@@ -17,4 +17,9 @@ List of supported hosts
 - Yahoo mail
 - Hotmail (.com and .nl)
 
-<i>More coming soon</i>
+Like the project?
+==============
+
+If you like the project, please consider donating!
+
+Bitcoin: 14ro2Pwsuu4adtNNytEhRJV4JNjT7wGPrN
