@@ -62,7 +62,8 @@
     <ManifestKeyFile>Martijn.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="S22.Imap">
@@ -180,9 +181,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
