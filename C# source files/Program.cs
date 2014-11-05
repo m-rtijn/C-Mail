@@ -21,10 +21,7 @@ namespace C_Mail_2._0
         private static int Port = 0;
         public static string FromAddress, FromPass;
 
-        //####################
-        //#Popup call methods#
-        //####################
-
+        #region Popup Call
         /// <summary>
         /// Shows the EmailIsSentPopup popup
         /// </summary>
@@ -67,11 +64,9 @@ namespace C_Mail_2._0
             // Show the popup
             popup.Show();
         }
+        #endregion
 
-        //####################
-        //#Send email methods#
-        //####################
-
+        #region Send
         /// <summary>
         /// Sends an email
         /// </summary>
@@ -228,11 +223,9 @@ namespace C_Mail_2._0
                 return false;
             }
         }
+        #endregion
 
-        //#######################
-        //#Receive email methods#
-        //#######################
-
+        #region Receive
         /// <summary>
         /// Retrieves all the unseen messages from the server
         /// </summary>
@@ -350,11 +343,9 @@ namespace C_Mail_2._0
                 return false;
             }
         }
+        #endregion
 
-        //#############################
-        //#Writing and Reading methods#
-        //#############################
-
+        #region Writing and Reading
         /// <summary>
         /// First encrypts, and then saves the login credentials to a file
         /// </summary>
@@ -413,5 +404,6 @@ namespace C_Mail_2._0
             FromAddress = DecryptedData[0];
             FromPass = DecryptedData[1];
         }
+        #endregion
     }
 }
