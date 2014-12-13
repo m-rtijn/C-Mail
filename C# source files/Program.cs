@@ -201,7 +201,7 @@ namespace C_Mail_2._0
             }
             else
             {
-                ErrorPopupCall("ERROR 30001" + "\n" + "Description: splitFromAddress[1] does not exists.");
+                ErrorPopupCall("ERROR 30001" + "\n" + "Description: splitFromAddress[1] does not exist.");
                 return false;
             }
         }
