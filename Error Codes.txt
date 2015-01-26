@@ -35,4 +35,4 @@ Error 60005: splitFromAddress[1] does not exists.
 Solution: The filled in FromAddress does not contain an "@"
 
 Error 70001:
-Solution: There are no (new) emails in your inbox, or POP3 acts like annoys everyone again.
+Solution: There are no (new) emails in your inbox, or POP3 acts annoying again.
