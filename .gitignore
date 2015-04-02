@@ -1,0 +1,49 @@
+*.exe
+C# source files/bin/Debug/C-Mail.exe.config
+C# source files/bin/Debug/C-Mail.pdb
+C# source files/bin/Debug/C-Mail.vshost.exe.config
+C# source files/bin/Debug/C-Mail.vshost.exe.manifest
+C# source files/bin/Debug/S22.Imap.dll
+C# source files/bin/Debug/S22.Imap.xml
+C# source files/obj/Debug/AddAttachmentPopup.baml
+C# source files/obj/Debug/AddAttachmentPopup.g.cs
+C# source files/obj/Debug/App.g.i.cs
+C# source files/obj/Debug/App.g.cs
+C# source files/obj/Debug/AddAttachmentPopup.g.i.cs
+C# source files/obj/Debug/C-Mail 2.0.csproj.FileListAbsolute.txt
+C# source files/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+C# source files/C-Mail 2.0.v12.suo
+C# source files/obj/Debug/C-Mail 2.0.csprojResolveAssemblyReference.cache
+C# source files/obj/Debug/C-Mail.pdb
+C# source files/obj/Debug/C-Mail_MarkupCompile.cache
+C# source files/obj/Debug/EmailIsSentPopup.baml
+*.cache
+C# source files/obj/Debug/EmailIsSentPopup.g.cs
+C# source files/obj/Debug/C-Mail.g.resources
+C# source files/obj/Debug/EmailIsSentPopup.g.i.cs
+C# source files/obj/Debug/EncryptionPasswordPopup.baml
+C# source files/obj/Debug/EncryptionPasswordPopup.g.cs
+C# source files/obj/Debug/EncryptionPasswordPopup.g.i.cs
+C# source files/obj/Debug/ErrorPopup.baml
+C# source files/obj/Debug/InboxWindow.g.i.cs
+C# source files/obj/Debug/LoginPopup.baml
+C# source files/obj/Debug/ErrorPopup.g.cs
+C# source files/obj/Debug/ErrorPopup.g.i.cs
+C# source files/obj/Debug/InboxWindow.baml
+C# source files/obj/Debug/InboxWindow.g.cs
+C# source files/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+C# source files/obj/Debug/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+C# source files/obj/Debug/LoginPopup.g.i.cs
+C# source files/obj/Debug/LoginConfirmedPopup.baml
+C# source files/obj/Debug/LoginConfirmedPopup.g.cs
+C# source files/obj/Debug/LoginConfirmedPopup.g.i.cs
+C# source files/obj/Debug/LoginPopup.g.cs
+C# source files/obj/Debug/MainWindow.baml
+C# source files/obj/Debug/MainWindow.g.cs
+C# source files/obj/Debug/MainWindow.g.i.cs
+C# source files/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+C# source files/packages/S22.Imap.3.6.0.0/lib/net35/S22.Imap.dll
+C# source files/packages/S22.Imap.3.6.0.0/lib/net35/S22.Imap.XML
+C# source files/packages/S22.Imap.3.6.0.0/lib/net40/S22.Imap.dll
+C# source files/packages/S22.Imap.3.6.0.0/lib/net40/S22.Imap.XML
+C# source files/packages/S22.Imap.3.6.0.0/S22.Imap.3.6.0.0.nupkg

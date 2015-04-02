@@ -3,18 +3,53 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="MainWindow1" x:Class="C_Mail_2._0.MainWindow"
         Title="C-Mail - Send email" Height="530" Width="530" ResizeMode="NoResize">
-    <Grid Margin="0,0,0,0">
-        <Label x:Name="ToLabel" Content="To:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,0" FontSize="16"/>
-        <TextBox x:Name="ToAddressTextBox" HorizontalAlignment="Left" Height="31" Margin="46,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="461" FontSize="16" TextChanged="ToAddressTextBox_TextChanged" TabIndex="1" Tag="" ToolTip="Fill in the address of the recipient here." AutoWordSelection="True"/>
-        <Label x:Name="SubjectLabel" Content="Subject:" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,0" FontSize="16"/>
-        <TextBox x:Name="BodyTextBox" HorizontalAlignment="Left" Height="317" Margin="10,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="497" FontSize="16" TextChanged="BodyTextBox_TextChanged" TabIndex="3" ToolTip="Fill in the body of the email here." VerticalScrollBarVisibility="Auto" AcceptsTab="True"/>
-        <Button x:Name="SendButton" Content="Send!" HorizontalAlignment="Left" Margin="432,453,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="SendButton_Click" TabIndex="4" ToolTip="Click here to send your email."/>
-        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="10,453,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="CloseButton_Click" TabIndex="6" ToolTip="Click here to close this window."/>
-        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="90,453,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="LoginButton_Click" TabIndex="5" ToolTip="Click here to log in."/>
-        <TextBox x:Name="SubjectTextBox" HorizontalAlignment="Left" Height="31" Margin="75,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="432" FontSize="16" TextChanged="ToAddressTextBox_TextChanged" ToolTip="Fill in your subject here." TabIndex="2"/>
-        <Label x:Name="CC_Label" Content="CC:" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,0" FontSize="16"/>
-        <TextBox x:Name="CCAddressTextBox" HorizontalAlignment="Left" Height="31" Margin="46,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="461" FontSize="16" TextChanged="ToAddressTextBox_TextChanged" TabIndex="1" Tag="" ToolTip="Fill in the address of the CC here."/>
-        <Button x:Name="AddAttachmentButton" Content="Add attachment" HorizontalAlignment="Left" Margin="170,453,0,0" VerticalAlignment="Top" Width="125" FontSize="16" Click="AddAttachmentButton_Click" TabIndex="5" ToolTip="Click here to add an attachment to your email."/>
-
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="100*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="100*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="2">
+            <Button x:Name="SendButton" Content="Send!" Click="SendButton_Click" TabIndex="4"
+                    ToolTip="Click here to send your email."
+                    Style="{StaticResource ToolBarButtonStyle}"/>
+            <Button x:Name="LoginButton" Content="Login" Click="LoginButton_Click" TabIndex="5" 
+                    ToolTip="Click here to log in."
+                    Style="{StaticResource ToolBarButtonStyle}"/>
+            <Button x:Name="AddAttachmentButton" Content="Add attachment" Click="AddAttachmentButton_Click" 
+                    TabIndex="5" ToolTip="Click here to add an attachment to your email."
+                    Style="{StaticResource ToolBarButtonStyle}"/>
+            <Button x:Name="CloseButton" Content="Close" Click="CloseButton_Click" 
+                    TabIndex="6" ToolTip="Click here to close this window."
+                    Style="{StaticResource ToolBarButtonStyle}"/>
+        </StackPanel>
+        <Label x:Name="ToLabel" Content="To:" Style="{StaticResource LabelStyle}"
+               Grid.Column="0" Grid.Row="1"/>
+        <TextBox x:Name="ToAddressTextBox" TextChanged="ToAddressTextBox_TextChanged" 
+                 TabIndex="1" Tag="" ToolTip="Fill in the address of the recipient here." AutoWordSelection="True"
+                 Style="{StaticResource TextBoxStyle}"
+                 Grid.Column="1" Grid.Row="1"/>
+        <Label x:Name="SubjectLabel" Content="Subject:" Style="{StaticResource LabelStyle}"
+               Grid.Column="0" Grid.Row="2"/>
+        <TextBox x:Name="SubjectTextBox" TextChanged="ToAddressTextBox_TextChanged" 
+                 ToolTip="Fill in your subject here." TabIndex="2"
+                 Style="{StaticResource TextBoxStyle}"
+                 Grid.Column="1" Grid.Row="2"/>
+        <Label x:Name="CC_Label" Content="CC:" Style="{StaticResource LabelStyle}"
+               Grid.Row="3" Grid.Column="0"/>
+        <TextBox x:Name="CCAddressTextBox" TextChanged="ToAddressTextBox_TextChanged" 
+                 TabIndex="1" Tag="" ToolTip="Fill in the address of the CC here."
+                 Style="{StaticResource TextBoxStyle}"
+                 Grid.Row="3" Grid.Column="1"/>
+        <TextBox x:Name="BodyTextBox" TextChanged="BodyTextBox_TextChanged" TabIndex="3" 
+                 ToolTip="Fill in the body of the email here."  AcceptsTab="True"
+                 Style="{StaticResource TextBoxStyle}"
+                 Grid.Column="1" Grid.Row="4"/>
     </Grid>
 </Window>
